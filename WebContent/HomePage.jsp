@@ -13,32 +13,34 @@
 		margin: 0;
 		padding: 0;
 	}
+	h1:hover{
+		opacity: 0.8;
+	}
 	.user_button:hover{
 		opacity: 0.8;
 	}
 
 </style>
 <body>
-	<div class="header" style="width: 100%; height: 110px; background-color: #dbdbdb; position: fixed;">
-		<a href="HomePage.jsp" class="home_pic"><img src="logo.png" style="width: 200px; float: left; margin-left: 10px; margin-top: 10px;"></a>
+	<div class="header" style="width: 100%; height: 80px; background-color: #f02618; position: fixed;">
+		<a href="HomePage.jsp" class="home_pic"><img src="home_icon.png" style="width: 200px; float: left; margin-left: 15px; margin-top: 3px;"></a>
+		
 		<form class="login_form" onsubmit="" method="GET" action=""">
-			<input class="search_bar" type="text" placeholder="Search for any class..." style="float: left; width: 55%;
-			 font-size: 15px; padding: 8px; border-radius: 20px; margin-top: 33px; margin-left: 8%;">
+			<input class="search_bar" type="text" placeholder="Search for any class..." style="float: left; width: 60%; font-size: 13px; padding: 12px;
+			 border-radius: 20px; margin-top: 20px; margin-left: 3%; background-color:#a81b11; border: none; outline: none; color: white;">
 		</form>
 		
+		
 		<% if(session.getAttribute("user") != null){%>
-		<div>
-			<a href="UserLogOutServlet" class="user_button"><img src="login_icon.png" style="float: right; width: 70px;
-			margin-right: 45px; margin-top: 15px;"></a>
-		</div>
+		<a href="" class="user_button"><img src="login.png" style="float: right; width: 50px;
+			margin-right: 25px; margin-top: 15px;"></a>
+		<a href="UserLogOutServlet"><h1 class="signout" style="float: right; color: white; margin-right:20px; font-size: 25px; margin-top: 25px;">Sign Out</h1></a>
 		<%}%>
+		
 		<% if(session.getAttribute("user") == null){%>
-		<div style="border-radius: 25px; background-color: #2e2e2e; float: right; font-size: 10px; 
-		padding-right: 12px; padding-left:12px; margin-top: 25px; margin-right: 10px;">
-			<a href="Register.jsp"><h1 style="float: right; color: #45ABA4;">Sign Up</h1></a>
-			<h1 style="float: right; color: #45ABA4; margin-left: 3px; margin-right: 3px"> / </h1>
-			<a href="Login.jsp"><h1 style="float: right; color: #45ABA4;">Sign In</h1></a>
-		</div>
+		<a href="RegisterPage.jsp"><h1 style="float: right; color: white; margin-right:25px; margin-top: 25px; font-size: 25px;">Sign Up</h1></a>
+		<h1 style="float: right; color: white; margin-left: 10px; margin-right: 10px; margin-top: 25px; font-size: 25px; "> / </h1>
+		<a href="LoginPage.jsp"><h1 style="float: right; color: white; margin-top: 25px; font-size: 25px;">Sign In</h1></a>
 		<%}%>
 		
 	</div>
