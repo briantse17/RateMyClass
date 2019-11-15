@@ -8,7 +8,7 @@
 </head>
 <body>
 	<div id="header" class="center">
-		<div id="search-section">
+		<div id="SearchResults.jsp">
 			<form action="BookSearchServlet">
 				<input type="text" id="search-field" name="searchField" placeholder="Search by Class name or Class ID">
 				<button id="submit-button" type="submit"><img id="mag-glass" src="Images/magnifying_glass.png" alt="Search!"></button>
@@ -33,7 +33,8 @@
 		List<Course> courses = searchDao.searchDB(request.getParameter("searchField"));
 		for(int i=0; i<courses.size(); i++) {%>
 			<div>
-			<%=courses.get(i).getCourseName()%>
+			<a class="courseID"><%=courses.get(i).getIntCourseID()%></a>
+			<a class="courseName"><%=courses.get(i).getCourseName()%></a>
 			</div>
 		<%
 		}%>
