@@ -6,6 +6,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -36,17 +37,23 @@ public class PageGenerator extends HttpServlet {
 		// TODO Auto-generated method stub
 		Connection conn = null;
 		Statement st = null;
-		ResultSet rs = null;
+		ResultSet rs = null, rsLikes = null;
+		String courseID =  request.getParameter("courseID");
 		try {
 			conn = DriverManager.getConnection("");
 			st = conn.createStatement();
 			rs = st.executeQuery("SELECT * FROM Courses;");
-			while (rs.next()) {
-				// make course objects
-			}
-			rs = st.executeQuery("SELECT * FROM Comments WHERE CourseId=;");
+			rs = st.executeQuery("SELECT * FROM Comments WHERE CourseId=" + courseID + ";");
 			while (rs.next()) {
 				// make comment objects, put into course objects
+				int CommentID = rs.getInt("CommentID");
+				String CommentBody = rs.getString("Body");
+				Date date = rs.getDate("Time");
+				Comment temp = new Comment(CommentID, CommentBody, date);
+				rsLikes = st.executeQuery("SELECT LikeValue FROM Likes WHERE CommentID='" + CommentID + "';");
+				while (rsLikes.next()) {
+					temp.addLikeValue(rsLikes.getInt("LikeValue"));
+				}
 			}
 			rs = st.executeQuery("SELECT * FROM Likes WHERE ;");
 			while (rs.next()) {
