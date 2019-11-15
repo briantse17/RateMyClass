@@ -8,8 +8,8 @@
 </head>
 <body>
 	<div id="header" class="center">
-		<div id="SearchResults.jsp">
-			<form action="BookSearchServlet">
+		<div id="search-section">
+			<form action="SearchResults.jsp">
 				<input type="text" id="search-field" name="searchField" placeholder="Search by Class name or Class ID">
 				<button id="submit-button" type="submit"><img id="mag-glass" src="Images/magnifying_glass.png" alt="Search!"></button>
 			</form>

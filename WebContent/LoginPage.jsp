@@ -43,13 +43,24 @@
 </head>
 <body>
 	<div id="header" class="center">
-		<img src="Images/bookworm.png" alt="bookworm" id="logo" onclick="backToHome()">
 		<div id="search-section">
-			<form action="BookSearchServlet">
-				<input type="text" id="search-field" name="searchField" placeholder="What book is on your mind?">
+			<form action="SearchResults.jsp">
+				<input type="text" id="search-field" name="searchField" placeholder="Search by Class name or Class ID">
 				<button id="submit-button" type="submit"><img id="mag-glass" src="Images/magnifying_glass.png" alt="Search!"></button>
 			</form>
 		</div>
+		<%
+		if(session.getAttribute("user") != null) {
+		%>
+		<span><a href="ProfilePage.jsp">Profile</a><a href="logout" style="margin-left: 30px;">Log Out</a></span>
+		<%
+		}
+		else {
+		%>
+		<span><a href="LoginPage.jsp">Login</a><a href="RegisterPage.jsp" style="margin-left: 30px;">Register</a></span>
+		<%
+		}
+		%>
 	</div>
 	<div id="body">
 		<div class="center" id="infoBox">
