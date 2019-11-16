@@ -107,7 +107,7 @@
 	// Needs like value of +1 or -1, commentID, and userID
 	function sendLike(likeValue, userID, commentID) {
 		$.ajax({
-			url: "LikeHandler?likeValue=" + likeValue + "&user=" + userID "&comment=" + commentID,
+			url: "LikeHandler?likeValue=" + likeValue + "&user=" + userID + "&comment=" + commentID,
 			method: "GET",
 			success: function() {
 				// CSS CHANGE
