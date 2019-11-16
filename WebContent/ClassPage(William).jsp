@@ -108,9 +108,9 @@
 	function sendLike(likeValue, userID, commentID) {
 		$.ajax({
 			url: "LikeHandler?likeValue=" + likeValue + "&user=" + userID + "&comment=" + commentID,
-			method: "GET",
+			method: "POST",
 			success: function() {
-				// CSS CHANGE
+				// CSS CHANGE, increment like counter
 			},
 			error: function(data, err, res) {
 			$("#error").html(data.responseText);
@@ -120,29 +120,44 @@
 </script>
 </head>
 <body>
+	<%@ page import="obj.DAO" %>
+	<%@ page import="obj.Comment" %>
+	<%@ page import="java.sql.SQLException" %>
+	<%@ page import="java.util.List" %>
+	<% DAO db = new DAO("root", "Jk3v1n$$7$$7"); 
+	   int UserID = -1/* sessionUser, -1 if none */;
+	   List<Comment> comments = db.getComments(Integer.parseInt(request.getParameter("class")), UserID);
+	   db.close();
+	%>
 	<div class = "container">
-		<div class = "header">
-		</div>
+		<div class = "header"></div>
 		<div class = "classContent">
-			
+		<% for (int i = 0; i < comments.size(); i++) { %>
+			<div class="comment">
+				<span><%= comments.get(i).getUserName() %></span>
+				<span><%= comments.get(i).getCommentDate() %></span>
+				<span><%= comments.get(i).getCommentBody() %></span>
+				<span><%= comments.get(i).getTotalLikes() %></span>
+			</div>
+		<% } %>
 		</div>
 		<div class = "responses">
 			<table id="table" border="1" >
-					<div class = "newComment">
-						<div class = "input">
-							<div class = "text_area">
-								<textarea id = "textarea" maxlength = "350" placeholder = "Please add your comment here" style="resize: none"></textarea>
-							</div>
-							<div class = "submitForm">
-								<button id = "show-modal" onclick = "toggleModal()">Continue Your Review</button>
-							</div>
-							<div class = "wordcount">
-								<span id="chars" >350 characters</span>
-							</div>
-							
-							
+				<div class = "newComment">
+					<div class = "input">
+						<div class = "text_area">
+							<textarea id = "textarea" maxlength = "350" placeholder = "Please add your comment here" style="resize: none"></textarea>
 						</div>
+						<div class = "submitForm">
+							<button id = "show-modal" onclick = "toggleModal()">Continue Your Review</button>
+						</div>
+						<div class = "wordcount">
+							<span id="chars" >350 characters</span>
+						</div>
+						
+						
 					</div>
+				</div>
 			</table>
 		</div>
 		<div class = "modal modal--hidden">

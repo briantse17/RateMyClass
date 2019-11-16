@@ -1,6 +1,8 @@
-package course;
+package obj;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Course {
 	int CourseID;
@@ -11,6 +13,7 @@ public class Course {
 	int Workload;
 	int GPA;
 	int NumOfRatings;
+	List<Comment> Comments = null;
 	
 	public Course(ResultSet res) throws SQLException {
 		CourseID = res.getInt(1);
@@ -21,6 +24,10 @@ public class Course {
 		Workload = res.getInt(6);
 		GPA = res.getInt(7);
 		NumOfRatings = res.getInt(8);
+	}
+	
+	public int getCourseID() {
+		return CourseID;
 	}
 	
 	public String getCourseName() {
@@ -45,5 +52,13 @@ public class Course {
 	
 	public int getNumOfRatings() {
 		return NumOfRatings;
+	}
+	
+	public List<Comment> getComments() {
+		return Comments;
+	}
+	
+	public void setComments(List<Comment> comments) {
+		Comments = comments;
 	}
 }

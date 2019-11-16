@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import course.Course;
+import obj.Course;
 
 public class SearchDAO {
 

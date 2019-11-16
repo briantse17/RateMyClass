@@ -1,12 +1,10 @@
+package classpage;
 
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,6 +12,12 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.google.gson.Gson;
+
+import obj.Comment;
+import obj.Course;
+import obj.DAO;
 
 /**
  * Servlet implementation class PageGenerator
@@ -35,35 +39,22 @@ public class PageGenerator extends HttpServlet {
 	 */
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		Connection conn = null;
-		Statement st = null;
-		ResultSet rs = null, rsLikes = null;
-		String courseID =  request.getParameter("courseID");
+		
+		String CourseJson =  request.getParameter("course");
+		int UserID = Integer.parseInt(request.getParameter("user"));
+		Gson gson = new Gson();
+		Course curr = gson.fromJson(CourseJson, Course.class);
+		
 		try {
-			conn = DriverManager.getConnection("");
-			st = conn.createStatement();
-			rs = st.executeQuery("SELECT * FROM Courses;");
-			rs = st.executeQuery("SELECT * FROM Comments WHERE CourseId=" + courseID + ";");
-			while (rs.next()) {
-				// make comment objects, put into course objects
-				int CommentID = rs.getInt("CommentID");
-				String CommentBody = rs.getString("Body");
-				Date date = rs.getDate("Time");
-				Comment temp = new Comment(CommentID, CommentBody, date);
-				rsLikes = st.executeQuery("SELECT LikeValue FROM Likes WHERE CommentID='" + CommentID + "';");
-				while (rsLikes.next()) {
-					temp.addLikeValue(rsLikes.getInt("LikeValue"));
-				}
-			}
-			rs = st.executeQuery("SELECT * FROM Likes WHERE ;");
-			while (rs.next()) {
-				// add like information to comment objects
-			}
-			request.setAttribute("Page", "");
+			DAO db = new DAO("root", "Jk3v1n$$7$$7");
+			List<Comment> comments = db.getComments(curr.getCourseID(), UserID);
+			curr.setComments(comments);
+			
+			request.setAttribute("Page", curr);
 			RequestDispatcher rd = request.getRequestDispatcher("");
 			rd.forward(request, response);
 		} catch (SQLException e) {
-			
+			request.setAttribute("error", "There was an error.");
 		}
 	}
 
