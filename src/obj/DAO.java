@@ -9,18 +9,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author hu.justin
- *
- */
-/**
- * @author hu.justin
- *
- */
-/**
- * @author hu.justin
- *
- */
+
 public class DAO {
 	Connection conn = null;
 	/**

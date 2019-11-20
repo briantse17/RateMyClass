@@ -124,7 +124,7 @@
 	<%@ page import="obj.Comment" %>
 	<%@ page import="java.sql.SQLException" %>
 	<%@ page import="java.util.List" %>
-	<% DAO db = new DAO("root", "Jk3v1n$$7$$7"); 
+	<% DAO db = new DAO("root", "password"); 
 	   int UserID = -1/* sessionUser, -1 if none */;
 	   List<Comment> comments = db.getComments(Integer.parseInt(request.getParameter("class")), UserID);
 	   db.close();
