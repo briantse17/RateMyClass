@@ -22,6 +22,10 @@ public class Comment {
 		TotalLikes = 0;
 		currUserLikeValue = 0;
 	}
+	
+	public int getUserID() {
+		return UserID;
+	}
 	/**
 	 * Adds a like value to the current total.
 	 * @param val
@@ -60,6 +64,13 @@ public class Comment {
 	 */
 	public void setTotalLikes(int totalLikes) {
 		TotalLikes = totalLikes;
+	}
+	/**
+	 * Gets the current user's like value.
+	 * @return the current user's like value
+	 */
+	public int getUserLikeValue() {
+		return currUserLikeValue;
 	}
 	
 	/**

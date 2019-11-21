@@ -22,14 +22,14 @@ import obj.DAO;
 /**
  * Servlet implementation class PageGenerator
  */
-@WebServlet("/PageGenerator")
-public class PageGenerator extends HttpServlet {
+@WebServlet("/ClassPage")
+public class ClassPage extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PageGenerator() {
+    public ClassPage() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -39,19 +39,15 @@ public class PageGenerator extends HttpServlet {
 	 */
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
-		String CourseJson =  request.getParameter("course");
-		int UserID = Integer.parseInt(request.getParameter("user"));
-		Gson gson = new Gson();
-		Course curr = gson.fromJson(CourseJson, Course.class);
-		
+
+		int UserID = 1;
+		int CourseID = Integer.parseInt(request.getParameter("class"));
 		try {
-			DAO db = new DAO("root", "Jk3v1n$$7$$7");
-			List<Comment> comments = db.getComments(curr.getCourseID(), UserID);
-			curr.setComments(comments);
+			DAO db = new DAO("root", "password");
+			Course currCourse = db.getCourseInfo(CourseID, UserID);
 			
-			request.setAttribute("Page", curr);
-			RequestDispatcher rd = request.getRequestDispatcher("");
+			request.setAttribute("Course", currCourse);
+			RequestDispatcher rd = request.getRequestDispatcher("/ClassPage(William).jsp");
 			rd.forward(request, response);
 		} catch (SQLException e) {
 			request.setAttribute("error", "There was an error.");

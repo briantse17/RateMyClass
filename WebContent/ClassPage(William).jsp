@@ -124,14 +124,15 @@
 	<%@ page import="obj.Comment" %>
 	<%@ page import="java.sql.SQLException" %>
 	<%@ page import="java.util.List" %>
-	<% DAO db = new DAO("root", "password"); 
-	   int UserID = -1/* sessionUser, -1 if none */;
-	   List<Comment> comments = db.getComments(Integer.parseInt(request.getParameter("class")), UserID);
-	   db.close();
-	%>
+	<%@ page import="obj.Course" %>
+
 	<div class = "container">
 		<div class = "header"></div>
 		<div class = "classContent">
+		<% Course current = (Course) request.getAttribute("Course"); %>
+		<% List<Comment> comments = current.getComments(); %>
+		<%= current.getCourseName() %>
+		<%= current.getCurrUser() %>
 		<% for (int i = 0; i < comments.size(); i++) { %>
 			<div class="comment">
 				<span><%= comments.get(i).getUserName() %></span>

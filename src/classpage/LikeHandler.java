@@ -36,9 +36,9 @@ public class LikeHandler extends HttpServlet {
 		int LikeValue = Integer.parseInt(request.getParameter("likeValue"));
 		int UserID = Integer.parseInt(request.getParameter("user"));
 		int CommentID = Integer.parseInt(request.getParameter("comment"));
-		DAO dbHandler = new DAO("justinyh", "justinyh");
 		
 		try {
+			DAO dbHandler = new DAO("root", "password");
 			dbHandler.updateLikes(UserID, CommentID, LikeValue);
 		} catch(SQLException e) {
 			response.setStatus(500);
@@ -46,7 +46,6 @@ public class LikeHandler extends HttpServlet {
 			pw.print("Error connecting to the database. Try again later.");
 			pw.flush();
 		}
-		dbHandler.close();
 	}
 
 	/**

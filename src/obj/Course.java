@@ -13,7 +13,8 @@ public class Course {
 	int Workload;
 	int GPA;
 	int NumOfRatings;
-	List<Comment> Comments = null;
+	List<Comment> Comments;
+	boolean currUserCommented;
 	
 	public Course(ResultSet res) throws SQLException {
 		CourseID = res.getInt(1);
@@ -24,6 +25,16 @@ public class Course {
 		Workload = res.getInt(6);
 		GPA = res.getInt(7);
 		NumOfRatings = res.getInt(8);
+		Comments = new ArrayList<Comment>();
+		currUserCommented = false;
+	}
+	
+	public void toggleCurrUser() {
+		currUserCommented = !currUserCommented;
+	}
+	
+	public boolean getCurrUser() {
+		return currUserCommented;
 	}
 	
 	public int getCourseID() {
@@ -54,11 +65,19 @@ public class Course {
 		return NumOfRatings;
 	}
 	
+	/**
+	 * Returns a list of comments in the course.
+	 * @return
+	 */
 	public List<Comment> getComments() {
 		return Comments;
 	}
 	
-	public void setComments(List<Comment> comments) {
-		Comments = comments;
+	/**
+	 * Adds comment to the comment list.
+	 * @param comment
+	 */
+	public void addComment(Comment comment) {
+		Comments.add(comment);
 	}
 }
