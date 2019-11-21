@@ -3,8 +3,6 @@ package classpage;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,23 +11,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.Gson;
-
-import obj.Comment;
 import obj.Course;
 import obj.DAO;
 
 /**
  * Servlet implementation class PageGenerator
  */
-@WebServlet("/ClassPage")
-public class ClassPage extends HttpServlet {
+@WebServlet("/classpage")
+public class ClassPageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ClassPage() {
+    public ClassPageServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -43,7 +38,7 @@ public class ClassPage extends HttpServlet {
 		int UserID = 1;
 		int CourseID = Integer.parseInt(request.getParameter("class"));
 		try {
-			DAO db = new DAO("root", "password");
+			DAO db = new DAO();
 			Course currCourse = db.getCourseInfo(CourseID, UserID);
 			
 			request.setAttribute("Course", currCourse);

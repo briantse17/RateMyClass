@@ -17,14 +17,14 @@ import obj.DAO;
 /**
  * Servlet implementation class LikeHandler
  */
-@WebServlet("/LikeHandler")
-public class LikeHandler extends HttpServlet {
+@WebServlet("/like")
+public class LikeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LikeHandler() {
+    public LikeServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -38,7 +38,7 @@ public class LikeHandler extends HttpServlet {
 		int CommentID = Integer.parseInt(request.getParameter("comment"));
 		
 		try {
-			DAO dbHandler = new DAO("root", "password");
+			DAO dbHandler = new DAO();
 			dbHandler.updateLikes(UserID, CommentID, LikeValue);
 		} catch(SQLException e) {
 			response.setStatus(500);

@@ -13,8 +13,8 @@ import java.util.List;
 public class DAO {
 	Connection conn = null;
 	String url = "jdbc:mysql://localhost:3306/FinalProject?useSSL=false";
-	String username;
-	String password;
+	String username = "root";
+	String password = "password";
 	/**
 	 * Constructs a DAO object given the database username and password.
 	 * @param username
@@ -22,11 +22,9 @@ public class DAO {
 	 * @throws SQLException 
 	 * @throws ClassNotFoundException 
 	 */
-	public DAO(String username, String password) throws SQLException{
+	public DAO() throws SQLException{
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			this.username = username;
-			this.password = password;
 			conn = DriverManager.getConnection(url, this.username, this.password);
 		} catch(SQLException e) {
 			System.out.println( e.getMessage());
@@ -40,6 +38,7 @@ public class DAO {
 	public Course getCourseInfo(int CourseID, int UserID) throws SQLException {
 		Statement st = null;
 		ResultSet rs = null;
+		// Eventually can save this in a separate .sql file to run, uses joins to only execute one query
 		String query = "SELECT c.*, d.*, u.UserName, l.UserID AS LikeUser, l.LikeValue FROM Courses c "+
 				"LEFT JOIN Comments d ON c.CourseID=d.CourseID " +
 			    "LEFT JOIN Likes l ON d.CommentID=l.CommentID " +
@@ -52,6 +51,7 @@ public class DAO {
 			rs = st.executeQuery(query);
 			if (!rs.next()) return null;
 			curr = new Course(rs);
+			// Gets comment information
 			while (!rs.isAfterLast()) {
 				int currCommentID = rs.getInt("CommentID");
 				if (rs.wasNull()) {
@@ -59,15 +59,22 @@ public class DAO {
 					continue;
 				}
 				Comment currComment = new Comment(rs);
+				
+				// Sets bool if user has commented on a course
 				if (currComment.getUserID() == UserID) curr.toggleCurrUser();
+				
+				// Gets like information
 				int likeCounter = 0;
 				while (!rs.isAfterLast() && rs.getInt("CommentID") == currCommentID) {
 					int currLikeValue = rs.getInt("LikeValue");
+					
+					//Sets user like value if current user has liked a comment
 					if (rs.getInt("LikeUser") == UserID) currComment.setUserLikeValue(currLikeValue);
 					likeCounter += currLikeValue;
 					rs.next();
 				}
 				currComment.setTotalLikes(likeCounter);
+				
 				curr.addComment(currComment);
 			}
 		} finally {
@@ -92,6 +99,8 @@ public class DAO {
 		String query = "SELECT * FROM Likes WHERE UserID='" + UserID + "' AND CommentID='" + CommentID + "'; ";
 		try {
 			conn = DriverManager.getConnection(url, username, password);
+			
+			// creates updatable resultset
 			st = conn.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE);
 			rs = st.executeQuery(query);
 			if (!rs.next()) {

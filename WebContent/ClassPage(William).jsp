@@ -107,22 +107,20 @@
 	// Needs like value of +1 or -1, commentID, and userID
 	function sendLike(likeValue, userID, commentID) {
 		$.ajax({
-			url: "LikeHandler?likeValue=" + likeValue + "&user=" + userID + "&comment=" + commentID,
-			method: "POST",
+			url: "like?likeValue=" + likeValue + "&user=" + userID + "&comment=" + commentID,
+			method: "GET",
 			success: function() {
 				// CSS CHANGE, increment like counter
 			},
 			error: function(data, err, res) {
-			$("#error").html(data.responseText);
+				$("#error").html(data.responseText);
 			}
 		})
 	}
 </script>
 </head>
 <body>
-	<%@ page import="obj.DAO" %>
 	<%@ page import="obj.Comment" %>
-	<%@ page import="java.sql.SQLException" %>
 	<%@ page import="java.util.List" %>
 	<%@ page import="obj.Course" %>
 
