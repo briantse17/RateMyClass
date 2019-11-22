@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="course.Course, course.CourseDAO, java.util.*"%>
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,16 +28,21 @@
 		%>
 	</div>
 	<div id="body">
-		<%
-		CourseDAO courseDao = new CourseDAO();
-		List<Course> courses = courseDao.searchCourse(request.getParameter("searchField"));
-		for(int i=0; i<courses.size(); i++) {%>
-			<div>
-			<a class="courseID"><%=courses.get(i).getIntCourseID()%></a>
-			<a class="courseName"><%=courses.get(i).getCourseName()%></a>
-			</div>
-		<%
-		}%>
+		<form action="createCourse">
+			Course Name
+			<br><br>
+			<input type="text" name="courseName">
+			<br><br>
+			Course ID
+			<br><br>
+			<input type="text" name="courseID">
+			<br><br>
+			Description
+			<br><br>
+			<input type="text" name="courseDesc">
+			<br>${message}<br>
+			<input type="submit">
+		</form>
 	</div>
 </body>
 </html>
