@@ -1,10 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="obj.DAO" %>
+<%@ page import="obj.Comment" %>
+<%@ page import="java.sql.SQLException" %>
+<%@ page import="java.util.List" %>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>ClassPage</title>
+<link rel="stylesheet" type="text/css" href="Header.css">
 <style>
 	body, html{
 		margin: 0;
@@ -14,10 +20,7 @@
 	.container{
 		width:100%;
 	}
-	.header{
-		width:100%;
-		height:180px;
-	}
+
 	.classContent{
 		width:100%;
 		height:200px;
@@ -49,7 +52,7 @@
 		margin-bottom:20px;
 	}
 	
-	button{
+	.continueComment{
 		width:100%;
 		padding: .5rem;
 		border:none;
@@ -58,11 +61,24 @@
 		transition: all .3s ease;
 		cursor: pointer;
 	}
+
 	
-	button:hover{
+	.continueComment:hover{
 		background-color: gray;
 	}
-	
+		
+	#show-modal{
+		width:100%;
+		padding: .5rem;
+		border:none;
+		background-color:lightgray;
+		color: #fff;
+		transition: all .3s ease;
+		cursor: pointer;
+	}
+	#show-modal:hover{
+		background-color: gray;
+	}
 	.modal_close{
 		float:right;		
 		margin-right:-2rem;
@@ -71,10 +87,10 @@
 	}
 	
 	.submitForm{
-		float: right;	
+		width: 140px;	
 	}
 	.wordcount{
-		float: left;
+		float: right;
 	}
 	textarea{
 		display:block;
@@ -100,6 +116,51 @@
 	.slider{
 		width: 90%;
 	}
+	.like_container{
+		padding-top: 200px;
+		background-color: gray;
+		width: 50%;
+		margin: 0 auto;
+		text-align: center;
+	}
+	
+	.like_image{
+		background: url("thumbs_up.png") no-repeat;
+		background-size: 20px 20px;
+		width: 20px;
+		height: 20px;
+		border: none;
+		display: inline-block;
+		float: left;
+	}
+	.like_image:hover{
+		background: url("thumbs_up_clicked.png") no-repeat;
+		background-size: 20px 20px;
+		cursor: pointer;
+		border: none;
+		
+	}
+	.dislike_image{
+		background: url("thumbs_down.png") no-repeat;
+		background-size: 20px 20px;
+		width: 20px;
+		height: 20px;
+		border: none;
+		display: inline-block;
+		float: left;
+		margin-left: 10px;
+	}
+	.dislike_image:hover{
+		background: url("thumbs_down_clicked.png") no-repeat;
+		background-size: 20px 20px;
+		cursor: pointer;
+		border: none;
+	}
+	.like_count{
+		margin-left: 10px;
+		float: left;
+	}
+		
 
 </style>
 <script>
@@ -107,39 +168,59 @@
 	// Needs like value of +1 or -1, commentID, and userID
 	function sendLike(likeValue, userID, commentID) {
 		$.ajax({
-			url: "like?likeValue=" + likeValue + "&user=" + userID + "&comment=" + commentID,
-			method: "GET",
+			url: "LikeHandler?likeValue=" + likeValue + "&user=" + userID + "&comment=" + commentID,
+			method: "POST",
 			success: function() {
+				$ ( "#like_count").html();
 				// CSS CHANGE, increment like counter
 			},
 			error: function(data, err, res) {
-				$("#error").html(data.responseText);
+			$("#error").html(data.responseText);
 			}
 		})
 	}
 </script>
 </head>
 <body>
-	<%@ page import="obj.Comment" %>
-	<%@ page import="java.util.List" %>
-	<%@ page import="obj.Course" %>
 
-	<div class = "container">
-		<div class = "header"></div>
-		<div class = "classContent">
-		<% Course current = (Course) request.getAttribute("Course"); %>
-		<% List<Comment> comments = current.getComments(); %>
-		<%= current.getCourseName() %>
-		<%= current.getCurrUser() %>
-		<% for (int i = 0; i < comments.size(); i++) { %>
-			<div class="comment">
-				<span><%= comments.get(i).getUserName() %></span>
-				<span><%= comments.get(i).getCommentDate() %></span>
-				<span><%= comments.get(i).getCommentBody() %></span>
-				<span><%= comments.get(i).getTotalLikes() %></span>
-			</div>
-		<% } %>
+		
+	<div class="header">
+		<a href="HomePage.jsp" class="home_pic"><img src="home_icon.png" class="home_button"></a>
+		
+		<% if(session.getAttribute("user") != null){%>
+		<a href="" class="user_button"><img src="login.png" style="float: right; width: 50px;
+			margin-right: 25px; margin-top: 15px;"></a>
+		<a href="UserLogOutServlet"><h1 class="signout" style="float: right; color: white; margin-right:20px; font-size: 25px; margin-top: 25px;">Sign Out</h1></a>
+		<%}%>
+		
+		<% if(session.getAttribute("user") == null){%>
+		<a href="RegisterPage.jsp" class="signout">Sign Up</a>
+		<h1 style="float: right; color: white; margin-left: 10px; margin-right: 10px; margin-top: 25px; font-size: 25px; "> / </h1>
+		<a href="LoginPage.jsp" class="signin">Sign In</a>
+		<%}%>
+	
+		<form class="search_form" onsubmit="" method="GET" action="">
+			<input class="search_bar" type="text" placeholder="Search for any class...">
+		</form>
+	</div>
+
+		<div class = "like_container">
+			<form class="like_form" onclick="return sendLike(1,?,?)">
+				<input type="submit" alt="submit" class="like_image" name="like_image" value="">
+			</form>
+			
+				<span class="like_count" id="like_count">0</span>
+				
+			<form class="dislike_form" onclick="return sendLike(-1,?,?)">
+				<input type="submit" alt="submit" class="dislike_image" name="dislike_image" value="">
+			</form>
 		</div>
+		
+		
+		
+		
+		
+		
 		<div class = "responses">
 			<table id="table" border="1" >
 				<div class = "newComment">
@@ -153,8 +234,6 @@
 						<div class = "wordcount">
 							<span id="chars" >350 characters</span>
 						</div>
-						
-						
 					</div>
 				</div>
 			</table>
@@ -196,7 +275,7 @@
 				</form>
 			</div>
 		</div>
-	</div>
+	<!--</div>-->
 
 	
 	<script>
