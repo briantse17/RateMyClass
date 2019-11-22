@@ -3,10 +3,12 @@ package obj;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -121,4 +123,25 @@ public class DAO {
 			rs.close();
 		}
 	}
+	
+	public void addComment(int courseID, int userID, String body) throws SQLException {
+		PreparedStatement ps = null;
+		try {
+			conn = DriverManager.getConnection(url, username, password);
+			ps = conn.prepareStatement("INSERT INTO Comments(CourseID, UserID, Body, Time) (?,?,?,?)");
+			ps.setInt(1, courseID);
+			ps.setInt(2, userID);
+			ps.setString(3, body);
+			Date date = new Date();
+			ps.setDate(4, (java.sql.Date) date); 
+			// creates updatable resultset
+
+		}
+		finally {
+			conn.close();
+			ps.close();
+		}
+	}
+	
+	
 }
