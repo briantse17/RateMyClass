@@ -3,29 +3,56 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+	<meta charset="UTF-8">
+	<title>Class Creation</title>
+	<link rel="stylesheet" type="text/css" href="Header.css">
+	<style type="text/css">
+		body, html{
+			height: 100%;
+			margin: 0;
+			padding: 0;
+		}
+		
+		#body{
+			position: relative;
+			top: 80px;
+		}
+		
+		.login_div{
+			margin: 0 auto;
+			display: block;
+			width: 60%;
+			padding-top: 100px;
+		}
+		
+		.login_form{
+			margin: 0 auto;
+			width: 40%;
+			display: block;
+			margin-bottom: 100px;
+		}
+	
+	</style>
 </head>
 <body>
-	<div id="header" class="center">
-		<div id="search-section">
-			<form action="SearchResults.jsp">
-				<input type="text" id="search-field" name="searchField" placeholder="Search by Class name or Class ID">
-				<button id="submit-button" type="submit"><img id="mag-glass" src="Images/magnifying_glass.png" alt="Search!"></button>
-			</form>
-		</div>
-		<%
-		if(session.getAttribute("user") != null) {
-		%>
-		<span><a href="ProfilePage.jsp">Profile</a><a href="logout" style="margin-left: 30px;">Log Out</a></span>
-		<%
-		}
-		else {
-		%>
-		<span><a href="LoginPage.jsp">Login</a><a href="RegisterPage.jsp" style="margin-left: 30px;">Register</a></span>
-		<%
-		}
-		%>
+	<div class="header">
+		<a href="HomePage.jsp" class="home_pic"><img src="home_icon.png" class="home_button"></a>
+	
+		<% if(session.getAttribute("user") != null){%>
+		<a href="" class="user_button"><img src="login.png" style="float: right; width: 50px;
+			margin-right: 25px; margin-top: 15px;"></a>
+		<a href="logout"><h1 class="signout" style="float: right; color: white; margin-right:20px; font-size: 25px; margin-top: 25px;">Sign Out</h1></a>
+		<%}%>
+		
+		<% if(session.getAttribute("user") == null){%>
+		<a href="RegisterPage.jsp" class="signout">Sign Up</a>
+		<h1 style="float: right; color: white; margin-left: 10px; margin-right: 10px; margin-top: 25px; font-size: 25px; "> / </h1>
+		<a href="LoginPage.jsp" class="signin">Sign In</a>
+		<%}%>
+	
+		<form class="search_form" method="GET" action="SearchResults.jsp">
+			<input name="searchField" class="search_bar" type="text" placeholder="Search for any class...">
+		</form>
 	</div>
 	<div id="body">
 		<form action="createCourse">

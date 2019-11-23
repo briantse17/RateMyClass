@@ -18,7 +18,7 @@ public class CourseDAO {
 		//attempts to create a course, if succeed then return 0, if course already exist then returns 1
 		
 		//check if class already exist by internal course id
-		List<Course> result = searchCourse(name);
+		List<Course> result = searchCourse(id);
 		if(result.size() != 0) return 1;
 		
 		//create class

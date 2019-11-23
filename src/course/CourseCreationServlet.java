@@ -34,7 +34,8 @@ public class CourseCreationServlet extends HttpServlet {
 		String courseName = request.getParameter("courseName").trim();
 		String courseID = request.getParameter("courseID");
 		String description = request.getParameter("courseDesc").trim();
-		courseID = courseID.replaceAll("//s", "");
+		courseID = courseID.replaceAll("\\s", "");
+		courseID = courseID.toUpperCase();
 		
 		CourseDAO courseDAO = new CourseDAO();
 		
@@ -46,7 +47,7 @@ public class CourseCreationServlet extends HttpServlet {
 				request.setAttribute("message", m);
 			}
 			else {
-				destination = "Course.jsp";
+				destination = "ClassPage.jsp";
 			}
 			
 			RequestDispatcher dispatcher = request.getRequestDispatcher(destination);
