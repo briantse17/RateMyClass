@@ -2,11 +2,13 @@ package obj;
 
 
 import java.sql.Connection;
+import java.util.Date;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
+import java.text.SimpleDateFormat;
 
 
 public class DAO {
@@ -42,7 +44,8 @@ public class DAO {
 				"LEFT JOIN Comments d ON c.CourseID=d.CourseID " +
 			    "LEFT JOIN Likes l ON d.CommentID=l.CommentID " +
 			    "LEFT JOIN Users u ON d.UserID=u.UserID " +
-			    "WHERE c.CourseID='" + CourseID + "';";
+			    "WHERE c.CourseID='" + CourseID + 
+			    "' ORDER BY d.Time DESC;";
 		Course curr = null;
 		try {
 			conn = DriverManager.getConnection(url, username, password);
@@ -120,4 +123,28 @@ public class DAO {
 			rs.close();
 		}
 	}
+	
+	public void addComment(int courseID, int userID, String body) throws SQLException {
+		PreparedStatement ps = null;
+		try {
+			System.out.println(courseID);
+			conn = DriverManager.getConnection(url, username, password);
+			ps = conn.prepareStatement("INSERT INTO Comments(CourseID, UserID, Body, Time) values (?,?,?,?);");
+			ps.setInt(1, courseID);
+			ps.setInt(2, userID);
+			ps.setString(3, body);
+			Date now = new Date();
+			SimpleDateFormat sdf = new SimpleDateFormat("YYYY/MM/dd HH:mm:ss");
+			ps.setString(4, sdf.format(now)); 
+			ps.execute();
+			// creates updatable resultset
+
+		}
+		finally {
+			conn.close();
+			ps.close();
+		}
+	}
+	
+	
 }

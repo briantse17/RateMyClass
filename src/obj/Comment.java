@@ -5,7 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
-public class Comment {
+public class Comment{
 	
 	/**
 	 * Constructs a Comment object given a ResultSet from a database query.
@@ -21,6 +21,7 @@ public class Comment {
 		TotalLikes = 0;
 		currUserLikeValue = 0;
 	}
+
 	
 	public int getUserID() {
 		return UserID;

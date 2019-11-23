@@ -164,7 +164,9 @@
 				<div class = "modal_close">
 					<span>X</span>
 				</div>
-				<form id = "submitReview">
+				<form id = "submitReview" method="POST" action = "CommentServlet">
+					<input type="hidden" id="custId" name="userID" value=1 <%-- "${user.getID}" --%>>
+					<input type="hidden" id="custId" name="courseID" value=1>
 					<label class="slider_title" for="difficulty">Class Difficulty</label>
 					<input class="slider" type="range" name="difficulty" min="1" max="5" value="3" id="class_difficulty">
 					<p style="bottom: 78px;" class="value" id="class_d_value"></p>
