@@ -42,6 +42,7 @@ public class ClassPageServlet extends HttpServlet {
 			Course currCourse = db.getCourseInfo(CourseID, UserID);
 			
 			request.setAttribute("Course", currCourse);
+			request.setAttribute("comments", currCourse.getComments());
 			RequestDispatcher rd = request.getRequestDispatcher("/ClassPage(William).jsp");
 			rd.forward(request, response);
 		} catch (SQLException e) {

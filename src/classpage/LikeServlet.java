@@ -36,11 +36,17 @@ public class LikeServlet extends HttpServlet {
 		int LikeValue = Integer.parseInt(request.getParameter("likeValue"));
 		int UserID = Integer.parseInt(request.getParameter("user"));
 		int CommentID = Integer.parseInt(request.getParameter("comment"));
-		
+		int totalLikes = Integer.parseInt(request.getParameter("totalLikes"));
+		System.out.println("Liked..");
 		try {
 			DAO dbHandler = new DAO();
-			dbHandler.updateLikes(UserID, CommentID, LikeValue);
+			int val = dbHandler.updateLikes(UserID, CommentID, LikeValue);
+			totalLikes += val*LikeValue;
+			PrintWriter pw = response.getWriter();
+			pw.println(totalLikes);
+			pw.close();
 		} catch(SQLException e) {
+			System.out.println(e.getMessage());
 			response.setStatus(500);
 			PrintWriter pw = response.getWriter();
 			pw.print("Error connecting to the database. Try again later.");

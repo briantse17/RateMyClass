@@ -100,17 +100,34 @@
 	.slider{
 		width: 90%;
 	}
+	.button-wrap {
+		width: 50px;
+	}
+	.selected {
+		color: blue;
+	}
 
 </style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
 	// AJAX CALL FOR LIKE/DISLIKE
 	// Needs like value of +1 or -1, commentID, and userID
 	function sendLike(likeValue, userID, commentID) {
+		var currLikesSelector = $("#" + commentID + " .likenum");
+		let button = likeValue == 1? " .like" : " .dislike";
+		var clickedButton = $("#" + commentID + button);
 		$.ajax({
-			url: "like?likeValue=" + likeValue + "&user=" + userID + "&comment=" + commentID,
+			url: "like?likeValue=" + likeValue + "&user=" + userID + "&comment=" + commentID + "&totalLikes=" + currLikesSelector.html(),
 			method: "GET",
-			success: function() {
-				// CSS CHANGE, increment like counter
+			success: function(res, status, xhr) {
+				if (clickedButton.hasClass("selected")){
+					clickedButton.removeClass("selected");
+				}
+				else {
+					$("#" + commentID + " button").removeClass("selected");
+					clickedButton.addClass("selected");
+				}
+				currLikesSelector.html(res);
 			},
 			error: function(data, err, res) {
 				$("#error").html(data.responseText);
@@ -128,15 +145,24 @@
 		<div class = "header"></div>
 		<div class = "classContent">
 		<% Course current = (Course) request.getAttribute("Course"); %>
-		<% List<Comment> comments = current.getComments(); %>
-		<%= current.getCourseName() %>
-		<%= current.getCurrUser() %>
-		<% for (int i = 0; i < comments.size(); i++) { %>
-			<div class="comment">
-				<span><%= comments.get(i).getUserName() %></span>
-				<span><%= comments.get(i).getCommentDate() %></span>
-				<span><%= comments.get(i).getCommentBody() %></span>
-				<span><%= comments.get(i).getTotalLikes() %></span>
+		<% List<Comment> comments = current.getComments();  %>
+		
+		${Course.courseName}
+		${Course.intCourseID}
+		${Course.courseDesc}
+		<% for (int i = 0; i < comments.size(); i++) {
+			Comment curr = comments.get(i);%>
+			<div class="comment" id=<%=curr.getCommentID() %>>
+				<span><%= curr.getUserName() %></span>
+				<span><%= curr.getCommentDate() %></span>
+				<span><%= curr.getCommentBody() %></span>
+				<div class="button-wrap">
+					<button onclick="sendLike(1, 1, <%=curr.getCommentID() %>)" class="like <%= curr.getUserLikeValue() == 1? "selected" : ""%>">Like</button>
+				</div>
+				<div class="button-wrap">
+					<button onclick="sendLike(-1, 1, <%=curr.getCommentID() %>)" class="dislike <%= curr.getUserLikeValue() == -1? "selected" : ""%>">Dislike</button>
+				</div>
+				<span class="likenum"><%= curr.getTotalLikes() %></span>
 			</div>
 		<% } %>
 		</div>

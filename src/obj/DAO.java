@@ -95,10 +95,11 @@ public class DAO {
 	 * @param LikeValue
 	 * @throws SQLException
 	 */
-	public void updateLikes(int UserID, int CommentID, int LikeValue) throws SQLException {
+	public int updateLikes(int UserID, int CommentID, int LikeValue) throws SQLException {
 		Statement st = null;
 		ResultSet rs = null;
 		String query = "SELECT * FROM Likes WHERE UserID='" + UserID + "' AND CommentID='" + CommentID + "'; ";
+		int val = 1;
 		try {
 			conn = DriverManager.getConnection(url, username, password);
 			
@@ -106,14 +107,20 @@ public class DAO {
 			st = conn.createStatement(ResultSet.TYPE_FORWARD_ONLY, ResultSet.CONCUR_UPDATABLE);
 			rs = st.executeQuery(query);
 			if (!rs.next()) {
+				System.out.println("inserting into db");
 				st.execute("INSERT INTO Likes (UserID, CommentID, LikeValue) values (" + UserID + ", " + CommentID + ", " + LikeValue + ");");
 			}
 			else {
+				System.out.println("updating db");
 				int currLike = rs.getInt("LikeValue");
-				if (currLike == LikeValue) rs.deleteRow();
+				if (currLike == LikeValue) {
+					rs.deleteRow();
+					val = -1;
+				}
 				else {
 					rs.updateInt("LikeValue", LikeValue);
 					rs.updateRow();
+					val = 2;
 				}
 			}
 		}
@@ -122,6 +129,7 @@ public class DAO {
 			st.close();
 			rs.close();
 		}
+		return val;
 	}
 	
 	public void addComment(int courseID, int userID, String body) throws SQLException {
