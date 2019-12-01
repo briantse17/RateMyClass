@@ -116,7 +116,7 @@
 	.slider{
 		width: 90%;
 	}
-	.like_container{
+	.comment{
 		padding-top: 200px;
 		background-color: gray;
 		width: 50%;
@@ -124,66 +124,83 @@
 		text-align: center;
 	}
 	
-	.like_image{
-		background: url("thumbs_up.png") no-repeat;
-		background-size: 20px 20px;
-		width: 20px;
-		height: 20px;
-		border: none;
+	.like_button{
 		display: inline-block;
-		float: left;
 	}
-	.like_image:hover{
-		background: url("thumbs_up_clicked.png") no-repeat;
-		background-size: 20px 20px;
+	.like_button:hover{
 		cursor: pointer;
-		border: none;
 		
 	}
-	.dislike_image{
-		background: url("thumbs_down.png") no-repeat;
-		background-size: 20px 20px;
-		width: 20px;
-		height: 20px;
-		border: none;
+	.dislike_button{
 		display: inline-block;
-		float: left;
-		margin-left: 10px;
 	}
-	.dislike_image:hover{
-		background: url("thumbs_down_clicked.png") no-repeat;
-		background-size: 20px 20px;
+	.dislike_button:hover{
 		cursor: pointer;
-		border: none;
 	}
-	.like_count{
-		margin-left: 10px;
-		float: left;
+	.likenum{
+		padding-bottom: 40px;
+		font-size: 20px;
 	}
+	.button-wrap{
+		text-align: left;
+		
+	}
+	.text-container{
+		text-align: left;
+	}
+	.like_selected{
+		content: url("thumbs_up_clicked.png");
+	}
+	.dislike_selected{
+		content: url("thumbs_up_clicked.png");
+	}
+	.like_selected:hover{
+		content: url("thumbs_up.png");
+	}
+	.dislike_selected:hover{
+		content: url("thumbs_down.png");
+	}
+	.like:hover{
+		content: url("thumbs_up_clicked.png");
+	}
+	.dislike:hover{
+		content: url("thumbs_down_clicked.png");
+	}
+	
 		
 
 </style>
 <script>
 	// AJAX CALL FOR LIKE/DISLIKE
 	// Needs like value of +1 or -1, commentID, and userID
+	
+	// JUSTIN'S CODE
 	function sendLike(likeValue, userID, commentID) {
+		var currLikesSelector = $("#" + commentID + " .likenum");
+		let button = likeValue == 1? " .like" : " .dislike";
+		var clickedButton = $("#" + commentID + button);
 		$.ajax({
-			url: "LikeHandler?likeValue=" + likeValue + "&user=" + userID + "&comment=" + commentID,
-			method: "POST",
-			success: function() {
-				$ ( "#like_count").html();
-				// CSS CHANGE, increment like counter
+			url: "like?likeValue=" + likeValue + "&user=" + userID + "&comment=" + commentID + "&totalLikes=" + currLikesSelector.html(),
+			method: "GET",
+			success: function(res, status, xhr) {
+				if (clickedButton.hasClass("selected")){
+					clickedButton.removeClass("selected");
+				}
+				else {
+					$("#" + commentID + " button").removeClass("selected");
+					clickedButton.addClass("selected");
+				}
+				currLikesSelector.html(res);
 			},
 			error: function(data, err, res) {
-			$("#error").html(data.responseText);
+				$("#error").html(data.responseText);
 			}
 		})
 	}
 </script>
 </head>
 <body>
-
-		
+	<!-- HEADER -->
 	<div class="header">
 		<a href="HomePage.jsp" class="home_pic"><img src="home_icon.png" class="home_button"></a>
 		
@@ -203,80 +220,102 @@
 			<input class="search_bar" type="text" placeholder="Search for any class...">
 		</form>
 	</div>
-
-		<div class = "like_container">
-			<form class="like_form" onclick="return sendLike(1,?,?)">
-				<input type="submit" alt="submit" class="like_image" name="like_image" value="">
-			</form>
+	<!-- /HEADER -->
+	
+	
+	
+	
+	<!-- COMMENTS -->
+	<%@ page import="obj.Comment" %>
+	<%@ page import="java.util.List" %>
+	<%@ page import="obj.Course" %>	
+	<% Course current = (Course) request.getAttribute("Course"); %>
+	<% List<Comment> comments = current.getComments();  %>
+	
+	${Course.courseName}
+	${Course.intCourseID}
+	${Course.courseDesc}
+	<% for (int i = 0; i < comments.size(); i++) {
+		Comment curr = comments.get(i);%>
+			<!-- COMMENTS -->
+		<div class="comment" id=<%=curr.getCommentID() %>>
+			<div class="text-container">
+				<span><%= curr.getUserName() %></span>
+				<br></br>
+				<span><%= curr.getCommentDate() %></span>
+				<br></br>
+				<span><%= curr.getCommentBody() %></span>
+				<br></br>
+			</div>
 			
-				<span class="like_count" id="like_count">0</span>
-				
-			<form class="dislike_form" onclick="return sendLike(-1,?,?)">
-				<input type="submit" alt="submit" class="dislike_image" name="dislike_image" value="">
-			</form>
-		</div>
-		
-		
-		
-		
-		
-		
-		<div class = "responses">
-			<table id="table" border="1" >
-				<div class = "newComment">
-					<div class = "input">
-						<div class = "text_area">
-							<textarea id = "textarea" maxlength = "350" placeholder = "Please add your comment here" style="resize: none"></textarea>
-						</div>
-						<div class = "submitForm">
-							<button id = "show-modal" onclick = "toggleModal()">Continue Your Review</button>
-						</div>
-						<div class = "wordcount">
-							<span id="chars" >350 characters</span>
-						</div>
-					</div>
-				</div>
-			</table>
-		</div>
-		<div class = "modal modal--hidden">
-			<div class = "modal_content"  style="width: 40%;">
-				<div class = "modal_close">
-					<span>X</span>
-				</div>
-				<form id = "submitReview">
-					<label class="slider_title" for="difficulty">Class Difficulty</label>
-					<input class="slider" type="range" name="difficulty" min="1" max="5" value="3" id="class_difficulty">
-					<p style="bottom: 78px;" class="value" id="class_d_value"></p>
-					
-					<label class="slider_title" for= "usefulness" style="position: relative; bottom: 40px;">Class Usefulness</label>
-					<input class="slider" type="range" name="usefulness" min="1" max="5" value="3" id="class_usefulness" style="position: relative; bottom: 40px;">
-					<p style="bottom: 120px;" class="value" id="class_u_value"></p>
-					
-					
-					<label for = "grade" style="position: relative; bottom: 80px;">Grade Received</label>
-					<select id = "grade" name = "grade" form = "submitReview" style="position: relative; bottom: 80px;">
-						<option value = "4.00">A</option>
-						<option value = "3.66">A-</option>
-						<option value = "3.33">B+</option>
-						<option value = "3.00">B</option>
-						<option value = "2.66">B-</option>
-						<option value = "2.33">C+</option>
-						<option value = "2.00">C</option>
-						<option value = "1.66">C-</option>
-						<option value = "1.33">D+</option>
-						<option value = "1.00">D</option>
-						<option value = "0.66">D-</option>						
-						<option value = "0.00">F</option>
-					</select> <br>
-					<label style="position: relative; bottom: 30px;" for = "description">Comment</label>
-					<textarea style="position: relative; bottom: 40px;" id = "description" name = "description" maxlength = "350" style="resize: none"></textarea>
-					<span style="position: relative; bottom: 50px;" id="innerchars"></span>
-					<button class = "continueComment">Submit</button>
-				</form>
+			<div class="button-wrap">
+				<button class="like_button" type="submit" style="border: 0; background: transparent" onclick="sendLike(1, 1, <%=curr.getCommentID() %>)">
+	   				<img src="thumbs_up.png" width="20px" height="20px" alt="submit" class="like<%= curr.getUserLikeValue() == 1? "_selected" : ""%>"/>
+				</button>
+				<span class="likenum"><%= curr.getTotalLikes() %></span>
+				<button class="dislike_button"type="submit" style="border: 0; background: transparent" onclick="sendLike(-1, 1, <%=curr.getCommentID() %>)">
+	   				<img src="thumbs_down.png" width="20px" height="20px" alt="submit" class="dislike<%= curr.getUserLikeValue() == -1? "_selected" : ""%>"/>
+				</button>
 			</div>
 		</div>
-	<!--</div>-->
-
+	<% } %>
+	
+	<!-- USER COMMENT BOX -->
+	<div class = "responses">
+		<table id="table" border="1" >
+			<div class = "newComment">
+				<div class = "input">
+					<div class = "text_area">
+						<textarea id = "textarea" maxlength = "350" placeholder = "Please add your comment here" style="resize: none"></textarea>
+					</div>
+					<div class = "submitForm">
+						<button id = "show-modal" onclick = "toggleModal()">Continue Your Review</button>
+					</div>
+					<div class = "wordcount">
+						<span id="chars" >350 characters</span>
+					</div>
+				</div>
+			</div>
+		</table>
+	</div>
+	<div class = "modal modal--hidden">
+		<div class = "modal_content"  style="width: 40%;">
+			<div class = "modal_close">
+				<span>X</span>
+			</div>
+			<form id = "submitReview">
+				<label class="slider_title" for="difficulty">Class Difficulty</label>
+				<input class="slider" type="range" name="difficulty" min="1" max="5" value="3" id="class_difficulty">
+				<p style="bottom: 78px;" class="value" id="class_d_value"></p>
+				
+				<label class="slider_title" for= "usefulness" style="position: relative; bottom: 40px;">Class Usefulness</label>
+				<input class="slider" type="range" name="usefulness" min="1" max="5" value="3" id="class_usefulness" style="position: relative; bottom: 40px;">
+				<p style="bottom: 120px;" class="value" id="class_u_value"></p>
+				
+				
+				<label for = "grade" style="position: relative; bottom: 80px;">Grade Received</label>
+				<select id = "grade" name = "grade" form = "submitReview" style="position: relative; bottom: 80px;">
+					<option value = "4.00">A</option>
+					<option value = "3.66">A-</option>
+					<option value = "3.33">B+</option>
+					<option value = "3.00">B</option>
+					<option value = "2.66">B-</option>
+					<option value = "2.33">C+</option>
+					<option value = "2.00">C</option>
+					<option value = "1.66">C-</option>
+					<option value = "1.33">D+</option>
+					<option value = "1.00">D</option>
+					<option value = "0.66">D-</option>						
+					<option value = "0.00">F</option>
+				</select> <br>
+				<label style="position: relative; bottom: 30px;" for = "description">Comment</label>
+				<textarea style="position: relative; bottom: 40px;" id = "description" name = "description" maxlength = "350" style="resize: none"></textarea>
+				<span style="position: relative; bottom: 50px;" id="innerchars"></span>
+				<button class = "continueComment">Submit</button>
+			</form>
+		</div>
+	</div>
+	<!-- /USER COMMENT BOX -->
 	
 	<script>
 		//WILLIAM LIU CODE BELOW
