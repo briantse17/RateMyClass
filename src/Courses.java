@@ -47,7 +47,7 @@ public class Courses extends HttpServlet {
 			while(resultSet.next()) {
 				String IntCourseID = resultSet.getString("IntCourseID");
 				if (IntCourseID.substring(0, Math.min(IntCourseID.length(), 4)).contentEquals(id)) {
-					list.add(resultSet.getString("IntCourseID")+": "+resultSet.getString("CourseName"));
+					list.add("<a href=\"classpage?class="+resultSet.getInt("CourseID")+"\">"+resultSet.getString("IntCourseID")+": "+resultSet.getString("CourseName")+"</a>");
 				}
 			}
 			if (list.isEmpty()) {

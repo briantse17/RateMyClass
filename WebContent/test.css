@@ -1,18 +1,6 @@
-
-#puppyImage {
-	height: 400 px;
-	width: 400px;
-	display: none;
-}
-
-#puppyImag {
-	height: 200 px;
-	width: 200px;
-	display: none;
-}
-
-#mainText {
-	color: red;
+#tab-body {
+	position: relative;
+	margin-top: 80px;
 }
 
 .tab {
@@ -21,6 +9,7 @@
   background-color: #f1f1f1;
   width: 80px;
   height: 300px;
+  top: 80px;
 }
 
 .tab button {
