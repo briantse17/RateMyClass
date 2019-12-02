@@ -45,16 +45,17 @@ public class CourseDAO {
 		Class.forName("com.mysql.jdbc.Driver");
 		Connection conn = DriverManager.getConnection(url, sqlUser, sqlPassword);
 		
-		String sql = "SELECT * FROM Courses WHERE CourseName = ? OR IntCourseID = ?";
-		PreparedStatement statement = conn.prepareStatement(sql); 
-		statement.setString(1, searchString);
-		statement.setString(2, searchString);
+		String sql = "SELECT * FROM Courses";
+		PreparedStatement statement = conn.prepareStatement(sql);
 		
 		ResultSet result = statement.executeQuery();
 		
 		List<Course> courses = new ArrayList<Course>();
 		while(result.next()) {
-			courses.add(new Course(result));
+			String intCourseID = result.getString("IntCourseID");
+			if(intCourseID.contentEquals(searchString) || intCourseID.substring(0,4).contentEquals(searchString)) {
+				courses.add(new Course(result));
+			}
 		}
 		
 		conn.close();
