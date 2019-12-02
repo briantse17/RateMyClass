@@ -10,44 +10,62 @@
 <script src="test.js"></script>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
         <script>
-	        $(document).on("click", "#cACCT", function() {
-	        	$('#ACCT').empty();
-	            $.get("Courses?id=ACCT", function(responseJson) {
-	            	var $ul = $("<ul>").appendTo($("#ACCT"));
-	            	$.each(responseJson, function(index, item) {
-	            		$("<li>").html(item).appendTo($ul);
-	            	});
-	            });
-	        });
+        $(document).on("click", "#cACCT", function() {
+        	$('#ACCT').empty();
+        	$("<div style=\"text-align: center;\"><h1>ACCT</h1></div>").appendTo($("#ACCT"));
+            $.get("Courses?id=ACCT", function(responseJson) {
+            	var $ul = $("<ul>").appendTo($("#ACCT"));
+            	$.each(responseJson, function(index, item) {
+            		$("<li>").html("<table style=\"border-collapse: collapse; width:100%; background-color: #ffcccc; padding: 10px; border: 3px solid #ff6600;\">"+item+"</table>").appendTo($ul);
+            	});
+            });
+        });
             $(document).on("click", "#cBUAD", function() {
             	$('#BUAD').empty();
+            	$("<div style=\"text-align: center;\"><h1>BUAD</h1></div>").appendTo($("#BUAD"));
             	$.get("Courses?id=BUAD", function(responseJson) {
             		var $ul = $("<ul>").appendTo($("#BUAD"));
             		$.each(responseJson, function(index, item) {
-            			$("<li>").html(item).appendTo($ul);
+            			$("<li>").html("<table style=\"border-collapse: collapse; width:100%; background-color: #ffcccc; padding: 10px; border: 3px solid #ff6600;\">"+item+"</table>").appendTo($ul);
             		});
             	});
             });
             $(document).on("click", "#cCSCI", function() {
             	$('#CSCI').empty();
+            	$("<div style=\"text-align: center;\"><h1>CSCI</h1></div>").appendTo($("#CSCI"));
                 $.get("Courses?id=CSCI", function(responseJson) {
                 	var $ul = $("<ul>").appendTo($("#CSCI"));
                 	$.each(responseJson, function(index, item) {
-                		$("<li>").html(item).appendTo($ul);
+                		$("<li>").html("<table style=\"border-collapse: collapse; width:100%; background-color: #ffcccc; padding: 10px; border: 3px solid #ff6600;\">"+item+"</table>").appendTo($ul);
                 	});
                 });
             });
+            $(document).on("click", "#cMATH", function() {
+	        	$('#MATH').empty();
+	        	$("<div style=\"text-align: center;\"><h1>MATH</h1></div>").appendTo($("#MATH"));
+	            $.get("Courses?id=MATH", function(responseJson) {
+	            	var $ul = $("<ul>").appendTo($("#MATH"));
+	            	$.each(responseJson, function(index, item) {
+	            		$("<li>").html("<table style=\"border-collapse: collapse; width:100%; background-color: #ffcccc; padding: 10px; border: 3px solid #ff6600;\">"+item+"</table>").appendTo($ul);
+	            	});
+	            });
+	        });
+            
         </script>
 	<style type="text/css">
 		body, html{
-			height: 100%;
 			margin: 0;
 			padding: 0;
 		}
 		#tab-body {
 			padding-top: 80px;
 		}
-		
+		#body{
+			text-align: center;
+			margin: 0 auto;
+			width: 60%;
+			margin-top: 100px;
+		}
 		.login_div{
 			margin: 0 auto;
 			display: block;
@@ -65,7 +83,7 @@
 	</style>
 </head>
 <body>
-	<div class="header">
+	<div class="header" style="top: 0px;">
 			<a href="HomePage.jsp" class="home_pic"><img src="home_icon.png" class="home_button"></a>
 		
 			<% if(session.getAttribute("user") != null){%>
@@ -84,27 +102,34 @@
 				<input name="searchField" class="search_bar" type="text" placeholder="Search for any class...">
 			</form>
 	</div>
-	<div id="tab-body">
-		<div class="tab">
-			<button class="tabs" onclick="section(event, 'BUAD')" id="cBUAD">BUAD</button>
-			<button class="tabs" onclick="section(event, 'CSCI')" id="cCSCI">CSCI</button>
-			<button class="tabs" onclick="section(event, 'EE')" id="cEE">EE</button>
-			<button class="tabs" onclick="section(event, 'MATH')" id="cMATH">MATH</button>
+	
+	<div id="body">
+		<div id="tab-body">
+			<div class="tab">
+				<button class="tabs" onclick="section(event, 'ACCT')" id="cACCT">ACCT</button>
+				<button class="tabs" onclick="section(event, 'BUAD')" id="cBUAD">BUAD</button>
+				<button class="tabs" onclick="section(event, 'CSCI')" id="cCSCI">CSCI</button>
+				<button class="tabs" onclick="section(event, 'MATH')" id="cMATH">MATH</button>
+			</div>
+			
+			<div id="ACCT" class="sectionContent">
+
+			</div>
+			
+			<div id="BUAD" class="sectionContent">
+			</div>
+						
+			<div id="CSCI" class="sectionContent">
+
+			</div>
+			
+			<div id="MATH" class="sectionContent">
+
+			</div>
+			
+			
 		</div>
-		
-		<div id="BUAD" class="sectionContent">
 		</div>
-					
-		<div id="CSCI" class="sectionContent">
-		</div>
-		
-		<div id="EE" class="sectionContent">
-		</div>
-		
-		<div id="MATH" class="sectionContent">
-		</div>
-		
-	</div>
 </body>
 <script>document.getElementById("cACCT").click();</script>
 </html>
