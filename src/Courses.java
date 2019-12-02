@@ -47,11 +47,12 @@ public class Courses extends HttpServlet {
 			while(resultSet.next()) {
 				String IntCourseID = resultSet.getString("IntCourseID");
 				if (IntCourseID.substring(0, Math.min(IntCourseID.length(), 4)).contentEquals(id)) {
-					list.add("<a href=\"classpage?class="+resultSet.getInt("CourseID")+"\">"+resultSet.getString("IntCourseID")+": "+resultSet.getString("CourseName")+"</a>");
+					list.add("<tr><td><a href=\"classpage?class="+resultSet.getInt("CourseID")+"\">"+resultSet.getString("IntCourseID")+": "+resultSet.getString("CourseName")+"</a></td><td>"+resultSet.getString("CourseDesc")+"</td></tr>");
 				}
 			}
 			if (list.isEmpty()) {
-				list.add("There are no classes under this id in the database.");
+				list.clear();
+				list.add("<tr><td>There are no classes under this id in the database.</td></tr>");
 			}
 		    String json = new Gson().toJson(list);
 		    response.setContentType("application/json");

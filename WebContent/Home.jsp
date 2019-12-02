@@ -12,28 +12,31 @@
         <script>
 	        $(document).on("click", "#cACCT", function() {
 	        	$('#ACCT').empty();
+	        	$("<div style=\"text-align: center;\"><h1>ACCT</h1></div>").appendTo($("#ACCT"));
 	            $.get("Courses?id=ACCT", function(responseJson) {
 	            	var $ul = $("<ul>").appendTo($("#ACCT"));
 	            	$.each(responseJson, function(index, item) {
-	            		$("<li>").html(item).appendTo($ul);
+	            		$("<li>").html("<table style=\"border-collapse: collapse; width:100%; background-color: #ffcccc; padding: 10px; border: 3px solid #ff6600;\">"+item+"</table>").appendTo($ul);
 	            	});
 	            });
 	        });
             $(document).on("click", "#cBUAD", function() {
             	$('#BUAD').empty();
+            	$("<div style=\"text-align: center;\"><h1>BUAD</h1></div>").appendTo($("#BUAD"));
             	$.get("Courses?id=BUAD", function(responseJson) {
             		var $ul = $("<ul>").appendTo($("#BUAD"));
             		$.each(responseJson, function(index, item) {
-            			$("<li>").html(item).appendTo($ul);
+            			$("<li>").html("<table style=\"border-collapse: collapse; width:100%; background-color: #ffcccc; padding: 10px; border: 3px solid #ff6600;\">"+item+"</table>").appendTo($ul);
             		});
             	});
             });
             $(document).on("click", "#cCSCI", function() {
             	$('#CSCI').empty();
+            	$("<div style=\"text-align: center;\"><h1>CSCI</h1></div>").appendTo($("#CSCI"));
                 $.get("Courses?id=CSCI", function(responseJson) {
                 	var $ul = $("<ul>").appendTo($("#CSCI"));
                 	$.each(responseJson, function(index, item) {
-                		$("<li>").html(item).appendTo($ul);
+                		$("<li>").html("<table style=\"border-collapse: collapse; width:100%; background-color: #ffcccc; padding: 10px; border: 3px solid #ff6600;\">"+item+"</table>").appendTo($ul);
                 	});
                 });
             });
@@ -60,7 +63,11 @@
 			display: block;
 			margin-bottom: 100px;
 		}
-	
+		
+		a {
+			color: black;
+		}
+		#CSCI tr:nth-child (even) {background-color: #ddd;}
 	</style>
 </head>
 <body>
