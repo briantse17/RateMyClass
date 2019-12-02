@@ -61,8 +61,9 @@
 		List<Course> courses = courseDao.searchCourse(request.getParameter("searchField"));
 		for(int i=0; i<courses.size(); i++) {%>
 			<div>
-			<a class="courseID"><%=courses.get(i).getIntCourseID()%></a>
-			<a class="courseName"><%=courses.get(i).getCourseName()%></a>
+			<a class="courseID" href="classpage?class=<%=courses.get(i).getIntCourseID()%>"><%=courses.get(i).getIntCourseID()%></a>: <a class="courseName"><%=courses.get(i).getCourseName()%></a>
+			<br>
+			<a><%=courses.get(i).getCourseDesc()%></a>
 			</div>
 		<%
 		}%>

@@ -14,28 +14,47 @@
 		}
 		
 		#body{
-			position: relative;
-			top: 80px;
-		}
-		
-		.login_div{
+			text-align: center;
 			margin: 0 auto;
-			display: block;
 			width: 60%;
-			padding-top: 100px;
+			margin-top: 100px;
 		}
 		
-		.login_form{
-			margin: 0 auto;
-			width: 40%;
-			display: block;
-			margin-bottom: 100px;
+		.input_bar{
+			width: 43%;
+			font-size: 15px;
+			margin-bottom: 20px;
+			padding: 8px;
+			border-radius: 20px;
+		}
+		.sub_button{
+			 background-color: #3CBC8D;
+			 text-decoration: none;
+			 cursor: pointer;
+			 border: none;
+			 color: white;
+			 padding: 10px;
+			 font-size: 15px;
+			 width: 45%;
+			 text-align: center;
+			 border-radius: 20px;
+		}
+		.input_titles{
+			text-align: center;
+			font-size: 20px;
+			color: gray;
+		}
+		#desc_box {
+			height: 100px;
+		}
+		.sub_button:hover{
+			opacity: 0.8;
 		}
 	
 	</style>
 </head>
 <body>
-	<div class="header">
+	<div class="header" style="top: 0px;">
 		<a href="HomePage.jsp" class="home_pic"><img src="home_icon.png" class="home_button"></a>
 	
 		<% if(session.getAttribute("user") != null){%>
@@ -56,19 +75,15 @@
 	</div>
 	<div id="body">
 		<form action="createCourse">
-			Course Name
-			<br><br>
-			<input type="text" name="courseName">
-			<br><br>
-			Course ID
-			<br><br>
-			<input type="text" name="courseID">
-			<br><br>
-			Description
-			<br><br>
-			<input type="text" name="courseDesc">
+			<h1  style="color: gray; font-size: 40px;">Class Creation</h1>
+			<h1 class="input_titles">Course Name</h1>
+			<input type="text" name="courseName" class="input_bar">
+			<h1 class="input_titles">Course ID</h1>
+			<input type="text" name="courseID" class="input_bar">
+			<h1 class="input_titles">Description</h1>
+			<input type="text" name="courseDesc" class="input_bar">
 			<br>${message}<br>
-			<input type="submit">
+			<input type="submit" class="sub_button">
 		</form>
 	</div>
 </body>
