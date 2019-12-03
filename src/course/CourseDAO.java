@@ -38,6 +38,22 @@ public class CourseDAO {
 		return 0;
 	}
 	
+	public Course searchCourseByID(int id) throws SQLException, ClassNotFoundException {
+		Class.forName("com.mysql.jdbc.Driver");
+		Connection conn = DriverManager.getConnection(url, sqlUser, sqlPassword);
+		
+		String sql = "SELECT * FROM Courses WHERE CourseID = ?";
+		PreparedStatement statement = conn.prepareStatement(sql);
+		statement.setInt(1, id);
+		
+		ResultSet result = statement.executeQuery();
+		
+		Course course = null;
+		if(result.next()) {
+			course = new Course(result);
+		}
+		return course;
+	}
 	public List<Course> searchCourse(String searchString) throws SQLException, ClassNotFoundException {
 		searchString = searchString.toLowerCase();
 		searchString = searchString.replaceAll("\\s", "");
