@@ -1,6 +1,4 @@
 package user;
-
-
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -42,14 +40,12 @@ public class UserLoginServlet extends HttpServlet {
 		// authenticate user
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
-		
 		UserDAO userDAO = new UserDAO();
 		
 		try {
 			User user = userDAO.checkLogin(username, password);
 			String destination = "LoginPage.jsp";
-			
-			if(user == null) {//no username
+			if(user == null){//no username
 				String m = "This user does not exist.";
 				request.setAttribute("message", m);
 			}
@@ -60,13 +56,13 @@ public class UserLoginServlet extends HttpServlet {
 			else {//authenticated
 				HttpSession session = request.getSession();
 				session.setAttribute("user", user);
-				destination = "HomePage.jsp";
+				destination = request.getParameter("from");
+				if (destination.equals("null")) destination = "HomePage.jsp";
 			}
 			
-			RequestDispatcher dispatcher = request.getRequestDispatcher(destination);
-			dispatcher.forward(request, response);
+			response.sendRedirect(destination);
 			
-		} catch (SQLException | ClassNotFoundException e) {
+		} catch (Exception e) {
 			throw new ServletException(e);
 		}
 	}

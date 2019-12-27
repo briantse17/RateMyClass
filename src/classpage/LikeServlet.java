@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import obj.ClassDAO;
 import obj.DAO;
 
 /**
@@ -37,9 +38,8 @@ public class LikeServlet extends HttpServlet {
 		int UserID = Integer.parseInt(request.getParameter("user"));
 		int CommentID = Integer.parseInt(request.getParameter("comment"));
 		int totalLikes = Integer.parseInt(request.getParameter("totalLikes"));
-		System.out.println("Liked..");
 		try {
-			DAO dbHandler = new DAO();
+			ClassDAO dbHandler = new ClassDAO();
 			int val = dbHandler.updateLikes(UserID, CommentID, LikeValue);
 			totalLikes += val*LikeValue;
 			PrintWriter pw = response.getWriter();

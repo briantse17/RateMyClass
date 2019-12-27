@@ -9,7 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import obj.DAO;
+import obj.ClassDAO;
 
 /**
  * Servlet implementation class CommentServlet
@@ -42,13 +42,14 @@ public class CommentServlet extends HttpServlet {
 		int courseID = Integer.parseInt(request.getParameter("courseID"));
 		int userID = Integer.parseInt(request.getParameter("userID"));
 		String body = request.getParameter("description");
-		double grade = Double.parseDouble(request.getParameter("grade")); 
+		float grade = Float.parseFloat(request.getParameter("grade")); 
 		int usefulness = Integer.parseInt(request.getParameter("usefulness"));
 		int difficulty = Integer.parseInt(request.getParameter("difficulty"));
-		DAO dao;
+		int workload = Integer.parseInt(request.getParameter("workload"));
+		ClassDAO dao;
 		try {
-			dao = new DAO();
-			dao.addComment(courseID, userID, body);
+			dao = new ClassDAO();
+			dao.addComment(courseID, userID, body, usefulness, difficulty, grade, workload);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

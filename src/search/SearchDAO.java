@@ -7,11 +7,7 @@ import java.util.List;
 
 import obj.Course;
 
-public class SearchDAO {
-
-	String url = "jdbc:mysql://google/RMC?cloudSqlInstance=ornate-course-255422:us-central1:lab-8&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false";
-	String sqlUser = "giovannl";
-	String sqlPassword = "giovanni";
+public class SearchDAO extends obj.DAO{
 	
 	public List<Course> searchDB(String searchString) throws SQLException, ClassNotFoundException {
 		searchString = searchString.toLowerCase();

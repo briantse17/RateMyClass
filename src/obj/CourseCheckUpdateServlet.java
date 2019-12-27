@@ -1,26 +1,26 @@
-package user;
+package obj;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.SQLException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class UserLogoutServlet
+ * Servlet implementation class CourseCheckUpdateServlet
  */
-@WebServlet("/logout")
-public class UserLogoutServlet extends HttpServlet {
+@WebServlet("/checkUpdate")
+public class CourseCheckUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UserLogoutServlet() {
+    public CourseCheckUpdateServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,14 +29,24 @@ public class UserLogoutServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//logout the user if there is one
-		HttpSession session = request.getSession(false);
-		if (session != null) {
-			session.removeAttribute("user");
+		//checks database for updates s
+		try {
+			int courseID = Integer.parseInt(request.getParameter("id"));
+			ClassDAO courseDao = new ClassDAO();
 			
-			RequestDispatcher dispatcher = request.getRequestDispatcher("HomePage.jsp");
-			dispatcher.forward(request, response);
+			Course course = courseDao.getCourseInfo(courseID, 0);//just inputing a random number 0 as user id
+			int numReviews = course.getNumOfRatings();
+			
+			PrintWriter out = response.getWriter();
+			
+			out.print(numReviews);
+			out.flush();
+			out.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		
 	}
 
 	/**

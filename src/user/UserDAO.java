@@ -1,11 +1,7 @@
 package user;
 import java.sql.*;
 
-public class UserDAO {
-
-	String url = "jdbc:mysql://google/RMC?cloudSqlInstance=ornate-course-255422:us-central1:lab-8&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false";
-	String sqlUser = "giovannl";
-	String sqlPassword = "giovanni";
+public class UserDAO extends obj.DAO{
 	
 	public User checkLogin(String username, String password) throws ClassNotFoundException, SQLException {
 

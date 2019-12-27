@@ -20,6 +20,10 @@ public class Comment{
 		UserName = res.getString("UserName");
 		TotalLikes = 0;
 		currUserLikeValue = 0;
+		Difficulty = res.getInt(17);
+		Grade = res.getFloat(15);
+		Usefulness = res.getInt(16);
+		Workload = res.getInt(18);
 	}
 
 	
@@ -98,6 +102,25 @@ public class Comment{
 		return sdf.format(CommentDate);
 	}
 	
+	public int getDifficulty() {
+		return Difficulty;
+	}
+
+
+	public float getGrade() {
+		return Grade;
+	}
+
+
+	public int getUsefulness() {
+		return Usefulness;
+	}
+
+
+	public int getWorkload() {
+		return Workload;
+	}
+	
 	private int CommentID;
 	private String CommentBody;
 	private int TotalLikes;
@@ -105,4 +128,8 @@ public class Comment{
 	private int UserID;
 	private int currUserLikeValue;
 	private String UserName;
+	private int Difficulty;
+	private float Grade;
+	private int Usefulness;
+	private int Workload;
 }

@@ -75,7 +75,7 @@ public class UserRegisterServlet extends HttpServlet {
 			RequestDispatcher dispatcher = request.getRequestDispatcher(destination);
 			dispatcher.forward(request, response);
 			
-		} catch (SQLException | ClassNotFoundException e) {
+		} catch (Exception e) {
 			throw new ServletException(e);
 		}
 	}

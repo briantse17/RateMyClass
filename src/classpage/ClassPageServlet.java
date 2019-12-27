@@ -10,9 +10,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import obj.Course;
-import obj.DAO;
+import obj.ClassDAO;
+import user.User;
 
 /**
  * Servlet implementation class PageGenerator
@@ -34,16 +36,20 @@ public class ClassPageServlet extends HttpServlet {
 	 */
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-
-		int UserID = 1;
+		HttpSession session = request.getSession();
+		User user = (User) session.getAttribute("user");
+		int UserID = -1;
+		if (user != null) {
+			UserID = user.getID();
+		}
 		int CourseID = Integer.parseInt(request.getParameter("class"));
 		try {
-			DAO db = new DAO();
+			ClassDAO db = new ClassDAO();
 			Course currCourse = db.getCourseInfo(CourseID, UserID);
-			
+			System.out.println(currCourse);
+			session.setAttribute("Course", currCourse);
 			request.setAttribute("Course", currCourse);
-			request.setAttribute("comments", currCourse.getComments());
-			RequestDispatcher rd = request.getRequestDispatcher("/ClassPage(William).jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/ClassPage.jsp");
 			rd.forward(request, response);
 		} catch (SQLException e) {
 			request.setAttribute("error", "There was an error.");
