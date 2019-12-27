@@ -47,7 +47,11 @@ public class CourseCreationServlet extends HttpServlet {
 				request.setAttribute("message", m);
 			}
 			else {
+<<<<<<< HEAD
 				destination = "HomePage.jsp";
+=======
+				destination = "ClassPage.jsp";
+>>>>>>> 71580760dc50a8a86b6079b05f3b7ddf31d047af
 			}
 			
 			RequestDispatcher dispatcher = request.getRequestDispatcher(destination);

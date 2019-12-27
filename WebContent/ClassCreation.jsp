@@ -11,16 +11,20 @@
 			height: 100%;
 			margin: 0;
 			padding: 0;
+<<<<<<< HEAD
 			background-color: #ff6947;
 			background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 800 400'%3E%3Cdefs%3E%3CradialGradient id='a' cx='396' cy='281' r='514' gradientUnits='userSpaceOnUse'%3E%3Cstop offset='0' stop-color='%23dd0000'/%3E%3Cstop offset='1' stop-color='%23ff6947'/%3E%3C/radialGradient%3E%3ClinearGradient id='b' gradientUnits='userSpaceOnUse' x1='400' y1='148' x2='400' y2='333'%3E%3Cstop offset='0' stop-color='%23ff8952' stop-opacity='0'/%3E%3Cstop offset='1' stop-color='%23ff8952' stop-opacity='0.5'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect fill='url(%23a)' width='800' height='400'/%3E%3Cg fill-opacity='0.4'%3E%3Ccircle fill='url(%23b)' cx='267.5' cy='61' r='300'/%3E%3Ccircle fill='url(%23b)' cx='532.5' cy='61' r='300'/%3E%3Ccircle fill='url(%23b)' cx='400' cy='30' r='300'/%3E%3C/g%3E%3C/svg%3E");
 			background-attachment: fixed;
 			background-size: cover;
+=======
+>>>>>>> 71580760dc50a8a86b6079b05f3b7ddf31d047af
 		}
 		
 		#body{
 			text-align: center;
 			margin: 0 auto;
 			width: 60%;
+<<<<<<< HEAD
 			margin-top: 110px;
 			background-color: white;
 			height: 80%;
@@ -29,10 +33,14 @@
 			background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 800 400'%3E%3Cdefs%3E%3CradialGradient id='a' cx='396' cy='281' r='514' gradientUnits='userSpaceOnUse'%3E%3Cstop offset='0' stop-color='%23ffffff'/%3E%3Cstop offset='1' stop-color='%23ffffff'/%3E%3C/radialGradient%3E%3ClinearGradient id='b' gradientUnits='userSpaceOnUse' x1='400' y1='148' x2='400' y2='333'%3E%3Cstop offset='0' stop-color='%23d1d1d1' stop-opacity='0'/%3E%3Cstop offset='1' stop-color='%23d1d1d1' stop-opacity='0.5'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect fill='url(%23a)' width='800' height='400'/%3E%3Cg fill-opacity='0.4'%3E%3Ccircle fill='url(%23b)' cx='267.5' cy='61' r='300'/%3E%3Ccircle fill='url(%23b)' cx='532.5' cy='61' r='300'/%3E%3Ccircle fill='url(%23b)' cx='400' cy='30' r='300'/%3E%3C/g%3E%3C/svg%3E");
 			background-attachment: fixed;
 			background-size: cover;
+=======
+			margin-top: 100px;
+>>>>>>> 71580760dc50a8a86b6079b05f3b7ddf31d047af
 		}
 		
 		.input_bar{
 			width: 43%;
+<<<<<<< HEAD
 			height: 100px;
 			font-size: 15px;
 			margin-bottom: 20px;
@@ -41,6 +49,15 @@
 		}
 		.sub_button{
 			 background-color: rgb(221,61,44);
+=======
+			font-size: 15px;
+			margin-bottom: 20px;
+			padding: 8px;
+			border-radius: 20px;
+		}
+		.sub_button{
+			 background-color: #3CBC8D;
+>>>>>>> 71580760dc50a8a86b6079b05f3b7ddf31d047af
 			 text-decoration: none;
 			 cursor: pointer;
 			 border: none;
@@ -59,6 +76,7 @@
 		.sub_button:hover{
 			opacity: 0.8;
 		}
+<<<<<<< HEAD
 		*, *:before, *:after {
 		  box-sizing: border-box;
 		}
@@ -141,6 +159,8 @@
 		.webflow-style-input input::-webkit-input-placeholder {
 		  color: gray;
 		}
+=======
+>>>>>>> 71580760dc50a8a86b6079b05f3b7ddf31d047af
 	
 	</style>
 </head>
@@ -166,6 +186,7 @@
 	</div>
 	<div id="body">
 		<form action="createCourse">
+<<<<<<< HEAD
 			<h1  style="color: gray; font-size: 40px; padding-top: 20px;">Class Creation<h1>
 			
 			<div class="webflow-style-input">
@@ -180,6 +201,15 @@
 			<textarea rows="5" cols="50" name="courseDesc" class="input_bar" style="resize: none"></textarea>
 			<!--  <input type="text" name="courseDesc" class="input_bar">   -->
 			
+=======
+			<h1  style="color: gray; font-size: 40px;">Class Creation<h1>
+			<h1 class="input_titles">Course Name<h1>
+			<input type="text" name="courseName" class="input_bar">
+			<h1 class="input_titles">Course ID<h1>
+			<input type="text" name="courseID" class="input_bar">
+			<h1 class="input_titles">Description<h1>
+			<input type="text" name="courseDesc" class="input_bar">
+>>>>>>> 71580760dc50a8a86b6079b05f3b7ddf31d047af
 			<br>${message}<br>
 			<input type="submit" class="sub_button">
 		</form>

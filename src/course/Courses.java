@@ -48,8 +48,12 @@ public class Courses extends HttpServlet {
 			while(resultSet.next()) {
 				String IntCourseID = resultSet.getString("IntCourseID");
 				if (IntCourseID.substring(0, Math.min(IntCourseID.length(), 4)).contentEquals(id)) {
+<<<<<<< HEAD
 					list.add("<tr><td class=\"link\" onclick=\"location.href=\'classpage?class="+resultSet.getInt("CourseID")+"\'\"><div style=\"text-align: left;\"><a style=\"text-decoration: none; color: black;\""+
 				" href=\"classpage?class="+resultSet.getInt("CourseID")+"\">"+"<b>"+resultSet.getString("IntCourseID")+"</b>: "+resultSet.getString("CourseName")+"</a></div></td><td class=\"desc\"><div style=\"text-align: left;\">"+resultSet.getString("CourseDesc")+"</div></td></tr>");
+=======
+					list.add("<tr><td><a href=\"classpage?class="+resultSet.getInt("CourseID")+"\">"+resultSet.getString("IntCourseID")+": "+resultSet.getString("CourseName")+"</a></td><td>"+resultSet.getString("CourseDesc")+"</td></tr>");
+>>>>>>> 71580760dc50a8a86b6079b05f3b7ddf31d047af
 				}
 			}
 			if (list.isEmpty()) {

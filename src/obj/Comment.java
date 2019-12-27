@@ -20,10 +20,13 @@ public class Comment{
 		UserName = res.getString("UserName");
 		TotalLikes = 0;
 		currUserLikeValue = 0;
+<<<<<<< HEAD
 		Difficulty = res.getInt(17);
 		Grade = res.getFloat(15);
 		Usefulness = res.getInt(16);
 		Workload = res.getInt(18);
+=======
+>>>>>>> 71580760dc50a8a86b6079b05f3b7ddf31d047af
 	}
 
 	
@@ -102,6 +105,7 @@ public class Comment{
 		return sdf.format(CommentDate);
 	}
 	
+<<<<<<< HEAD
 	public int getDifficulty() {
 		return Difficulty;
 	}
@@ -121,6 +125,8 @@ public class Comment{
 		return Workload;
 	}
 	
+=======
+>>>>>>> 71580760dc50a8a86b6079b05f3b7ddf31d047af
 	private int CommentID;
 	private String CommentBody;
 	private int TotalLikes;
@@ -128,8 +134,11 @@ public class Comment{
 	private int UserID;
 	private int currUserLikeValue;
 	private String UserName;
+<<<<<<< HEAD
 	private int Difficulty;
 	private float Grade;
 	private int Usefulness;
 	private int Workload;
+=======
+>>>>>>> 71580760dc50a8a86b6079b05f3b7ddf31d047af
 }

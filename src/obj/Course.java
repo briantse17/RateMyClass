@@ -3,13 +3,17 @@ package obj;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+<<<<<<< HEAD
 import java.util.Vector;
+=======
+>>>>>>> 71580760dc50a8a86b6079b05f3b7ddf31d047af
 
 public class Course {
 	int CourseID;
 	String CourseName;
 	String IntCourseID;
 	String CourseDesc;
+<<<<<<< HEAD
 	float Difficulty;
 	float Usefulness;
 	float Workload;
@@ -20,6 +24,13 @@ public class Course {
 	List<Integer> GradeDist;
 	List<Integer> UsefulDist;
 	List<Integer> WorkloadDist;
+=======
+	int Difficulty;
+	int Workload;
+	int GPA;
+	int NumOfRatings;
+	List<Comment> Comments;
+>>>>>>> 71580760dc50a8a86b6079b05f3b7ddf31d047af
 	boolean currUserCommented;
 	
 	public Course(ResultSet res) throws SQLException {
@@ -27,6 +38,7 @@ public class Course {
 		CourseName = res.getString(2);
 		IntCourseID = res.getString(3);
 		CourseDesc = res.getString(4);
+<<<<<<< HEAD
 		Difficulty = 0.0f;
 		Usefulness = 0.0f;
 		Workload = 0.0f;
@@ -43,6 +55,13 @@ public class Course {
 			UsefulDist.add(0);
 			WorkloadDist.add(0);
 		}
+=======
+		Difficulty = res.getInt(5);
+		Workload = res.getInt(6);
+		GPA = res.getInt(7);
+		NumOfRatings = res.getInt(8);
+		Comments = new ArrayList<Comment>();
+>>>>>>> 71580760dc50a8a86b6079b05f3b7ddf31d047af
 		currUserCommented = false;
 	}
 	
@@ -70,12 +89,21 @@ public class Course {
 		return CourseDesc;
 	}
 	
+<<<<<<< HEAD
 	public float getDifficulty() {
 		return Difficulty/NumOfRatings;
 	}
 	
 	public float getUsefulness() {
 		return Usefulness/NumOfRatings;
+=======
+	public int getDifficulty() {
+		return Difficulty;
+	}
+	
+	public int getWorkload() {
+		return Workload;
+>>>>>>> 71580760dc50a8a86b6079b05f3b7ddf31d047af
 	}
 	
 	public int getNumOfRatings() {
@@ -90,6 +118,7 @@ public class Course {
 		return Comments;
 	}
 	
+<<<<<<< HEAD
 	public boolean getUserCommented() {
 		return this.currUserCommented;
 	}
@@ -158,6 +187,8 @@ public class Course {
 	public List<Integer> getWorkloadDist(){
 		return this.WorkloadDist;
 	}
+=======
+>>>>>>> 71580760dc50a8a86b6079b05f3b7ddf31d047af
 	/**
 	 * Adds comment to the comment list.
 	 * @param comment

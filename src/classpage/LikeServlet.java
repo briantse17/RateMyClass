@@ -12,7 +12,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+<<<<<<< HEAD
 import obj.ClassDAO;
+=======
+>>>>>>> 71580760dc50a8a86b6079b05f3b7ddf31d047af
 import obj.DAO;
 
 /**
@@ -37,6 +40,7 @@ public class LikeServlet extends HttpServlet {
 		int LikeValue = Integer.parseInt(request.getParameter("likeValue"));
 		int UserID = Integer.parseInt(request.getParameter("user"));
 		int CommentID = Integer.parseInt(request.getParameter("comment"));
+<<<<<<< HEAD
 		int totalLikes = Integer.parseInt(request.getParameter("totalLikes"));
 		try {
 			ClassDAO dbHandler = new ClassDAO();
@@ -47,6 +51,13 @@ public class LikeServlet extends HttpServlet {
 			pw.close();
 		} catch(SQLException e) {
 			System.out.println(e.getMessage());
+=======
+		
+		try {
+			DAO dbHandler = new DAO();
+			dbHandler.updateLikes(UserID, CommentID, LikeValue);
+		} catch(SQLException e) {
+>>>>>>> 71580760dc50a8a86b6079b05f3b7ddf31d047af
 			response.setStatus(500);
 			PrintWriter pw = response.getWriter();
 			pw.print("Error connecting to the database. Try again later.");

@@ -5,11 +5,16 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Register Page</title>
+<<<<<<< HEAD
 	<link rel="stylesheet" type="text/css" href="css/Header.css">
 	<style type="text/css">
 		.search_bar::-webkit-input-placeholder{
 			color: white;
 		}
+=======
+	<link rel="stylesheet" type="text/css" href="Header.css">
+	<style type="text/css">
+>>>>>>> 71580760dc50a8a86b6079b05f3b7ddf31d047af
 		body, html{
 			height: 100%;
 			margin: 0;
@@ -17,6 +22,7 @@
 		}
 		
 		.login_div{
+<<<<<<< HEAD
 			float: right;
 			width: 55%;
 			padding-top: 100px;
@@ -38,6 +44,16 @@
 		
 		.login_icon{
 			width:200px;
+=======
+			margin: 0 auto;
+			display: block;
+			width: 60%;
+			padding-top: 60px;
+		}
+		
+		.login_icon{
+			width:300px;
+>>>>>>> 71580760dc50a8a86b6079b05f3b7ddf31d047af
 			margin: 0 auto;
 			display: block;
 		}
@@ -54,16 +70,34 @@
 			font-size: 40px;
 			color: gray;
 		}
+<<<<<<< HEAD
 
 		.sub_button{
 			 background-color: rgb(221,61,44);
+=======
+		
+		.input_bar{
+			width: 100%;
+			font-size: 15px;
+			margin-bottom: 20px;
+			padding: 8px;
+			border-radius: 20px;
+		}
+	
+		.sub_button{
+			 background-color: #3CBC8D;
+>>>>>>> 71580760dc50a8a86b6079b05f3b7ddf31d047af
 			 text-decoration: none;
 			 cursor: pointer;
 			 border: none;
 			 color: white;
 			 padding: 10px;
 			 font-size: 15px;
+<<<<<<< HEAD
 			 width: 100%;
+=======
+			 width: 105%;
+>>>>>>> 71580760dc50a8a86b6079b05f3b7ddf31d047af
 			 text-align: center;
 			 border-radius: 20px;
 		}
@@ -74,6 +108,7 @@
 		.user_button:hover{
 			opacity: 0.8;
 		}
+<<<<<<< HEAD
 		.background_text{
 			text-align: center;
 			color: white;
@@ -160,12 +195,18 @@
 		.webflow-style-input input::-webkit-input-placeholder {
 		  color: gray;
 		}
+=======
+>>>>>>> 71580760dc50a8a86b6079b05f3b7ddf31d047af
 		
 	</style>
 </head>
 <body>
 	<div class="header">
+<<<<<<< HEAD
 		<a href="HomePage.jsp" class="home_pic"><img src="img/home_icon.png" class="home_button"></a>
+=======
+		<a href="HomePage.jsp" class="home_pic"><img src="home_icon.png" class="home_button"></a>
+>>>>>>> 71580760dc50a8a86b6079b05f3b7ddf31d047af
 		
 		<a href="LoginPage.jsp" class="signout">Sign In</a>
 		
@@ -174,6 +215,7 @@
 		</form>
 	</div>
 	
+<<<<<<< HEAD
 	
 	<div class="background">
 		<h1 class="background_text" style="font-size: 40px; padding-top: 180px;">Hello!</h1>
@@ -183,10 +225,15 @@
 	
 	<div class="login_div" >
 		<img class="login_icon" src="img/login_symbol.png">
+=======
+	<div class="login_div" >
+		<img class="login_icon" src="login_image.png">
+>>>>>>> 71580760dc50a8a86b6079b05f3b7ddf31d047af
 		<form name="user_login" class="login_form" method="POST" action="register">
 		
 			<h1 class="signin_title">Register</h1>
 			
+<<<<<<< HEAD
 			<div class="webflow-style-input">
 				<input name="username" type="text" placeholder="Username"></input>
 			</div>
@@ -198,6 +245,13 @@
 				<input name="password-conf" type="password" placeholder="Confirm Password"></input>
 			</div>
 			
+=======
+			<input name="username" class="input_bar" type="text" placeholder="Username">
+			
+			<input name="password" class="input_bar" type="password" placeholder="Password">
+			
+			<input name="password-conf" class="input_bar" type="password" placeholder="Confirm Password" style="margin-bottom: 40px;">
+>>>>>>> 71580760dc50a8a86b6079b05f3b7ddf31d047af
 			<br>${message}<br>
 						
 			<input class="sub_button" type="submit" value="Sign Up">

@@ -25,7 +25,11 @@ public class CourseDAO {
 		Class.forName("com.mysql.jdbc.Driver");
 		Connection conn = DriverManager.getConnection(url, sqlUser, sqlPassword);
 		
+<<<<<<< HEAD
 		String sql = "INSERT INTO Courses(CourseName, IntCourseID, CourseDesc, Difficulty, Usefulness, Workload, GPA, NumOfRatings) VALUES(?, ?, ?,0,0,0,0,0)";
+=======
+		String sql = "INSERT INTO Courses(CourseName, IntCourseID, CourseDesc, Difficulty, Workload, GPA, NumOfRatings) VALUES(?, ?, ?, 0,0,0,0)";
+>>>>>>> 71580760dc50a8a86b6079b05f3b7ddf31d047af
 		PreparedStatement statement = conn.prepareStatement(sql);
 		statement.setString(1, name);
 		statement.setString(2, id);
@@ -38,6 +42,7 @@ public class CourseDAO {
 		return 0;
 	}
 	
+<<<<<<< HEAD
 	public Course searchCourseByID(int id) throws SQLException, ClassNotFoundException {
 		Class.forName("com.mysql.jdbc.Driver");
 		Connection conn = DriverManager.getConnection(url, sqlUser, sqlPassword);
@@ -54,6 +59,8 @@ public class CourseDAO {
 		}
 		return course;
 	}
+=======
+>>>>>>> 71580760dc50a8a86b6079b05f3b7ddf31d047af
 	public List<Course> searchCourse(String searchString) throws SQLException, ClassNotFoundException {
 		searchString = searchString.toLowerCase();
 		searchString = searchString.replaceAll("\\s", "");
@@ -61,17 +68,29 @@ public class CourseDAO {
 		Class.forName("com.mysql.jdbc.Driver");
 		Connection conn = DriverManager.getConnection(url, sqlUser, sqlPassword);
 		
+<<<<<<< HEAD
 		String sql = "SELECT * FROM Courses";
 		PreparedStatement statement = conn.prepareStatement(sql);
 
+=======
+		String sql = "SELECT * FROM Courses WHERE CourseName = ? OR IntCourseID = ?";
+		PreparedStatement statement = conn.prepareStatement(sql); 
+		statement.setString(1, searchString);
+		statement.setString(2, searchString);
+		
+>>>>>>> 71580760dc50a8a86b6079b05f3b7ddf31d047af
 		ResultSet result = statement.executeQuery();
 		
 		List<Course> courses = new ArrayList<Course>();
 		while(result.next()) {
+<<<<<<< HEAD
 			String intCourseID = result.getString("IntCourseID");
 			if(searchString.equalsIgnoreCase(intCourseID) || searchString.equalsIgnoreCase(intCourseID.substring(0,4))) {
 				courses.add(new Course(result));
 			}
+=======
+			courses.add(new Course(result));
+>>>>>>> 71580760dc50a8a86b6079b05f3b7ddf31d047af
 		}
 		
 		conn.close();

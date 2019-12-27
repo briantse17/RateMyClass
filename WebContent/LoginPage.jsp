@@ -5,6 +5,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Login Page</title>
+<<<<<<< HEAD
 	<link rel="stylesheet" type="text/css" href="css/Header.css">
 	<style type="text/css">
 	 
@@ -12,11 +13,16 @@
 			color: white;
 		}
 	
+=======
+	<link rel="stylesheet" type="text/css" href="Header.css">
+	<style type="text/css">
+>>>>>>> 71580760dc50a8a86b6079b05f3b7ddf31d047af
 		body, html{
 			height: 100%;
 			margin: 0;
 			padding: 0;
 		}
+<<<<<<< HEAD
 		.login_div{
 			float: left;
 			padding-top: 100px;
@@ -42,27 +48,63 @@
 			margin: 0 auto;
 			display: block;
 		}
+=======
+		
+		.login_div{
+			margin: 0 auto;
+			display: block;
+			width: 60%;
+			padding-top: 60px;
+		}
+		
+		.login_icon{
+			width:300px;
+			margin: 0 auto;
+			display: block;
+		}
+		
+>>>>>>> 71580760dc50a8a86b6079b05f3b7ddf31d047af
 		.login_form{
 			margin: 0 auto;
 			width: 40%;
 			display: block;
 			margin-bottom: 60px;
+<<<<<<< HEAD
 			
 		}
+=======
+		}
+		
+>>>>>>> 71580760dc50a8a86b6079b05f3b7ddf31d047af
 		.signin_title{
 			text-align: center;
 			font-size: 40px;
 			color: gray;
 		}
+<<<<<<< HEAD
 
 		.sub_button{
 			 background-color: rgb(221,61,44);
+=======
+		
+		.input_bar{
+			width: 100%;
+			font-size: 15px;
+			margin-bottom: 20px;
+			padding: 8px;
+			border-radius: 20px;
+		}
+	
+		.sub_button{
+			 background-color: #3CBC8D;
+>>>>>>> 71580760dc50a8a86b6079b05f3b7ddf31d047af
 			 text-decoration: none;
 			 cursor: pointer;
 			 border: none;
 			 color: white;
 			 padding: 10px;
 			 font-size: 15px;
+<<<<<<< HEAD
 			 width: 100%;
 			 text-align: center;
 			 border-radius: 20px;
@@ -158,12 +200,26 @@
 		.webflow-style-input input::-webkit-input-placeholder {
 		  color: gray;
 		}
+=======
+			 width: 105%;
+			 text-align: center;
+			 border-radius: 20px;
+		}
+	
+		.sub_button:hover{
+			opacity: 0.8;
+		}
+>>>>>>> 71580760dc50a8a86b6079b05f3b7ddf31d047af
 		
 	</style>
 </head>
 <body>
 	<div class="header">
+<<<<<<< HEAD
 		<a href="HomePage.jsp" class="home_pic"><img src="img/home_icon.png" class="home_button"></a>
+=======
+		<a href="HomePage.jsp" class="home_pic"><img src="home_icon.png" class="home_button"></a>
+>>>>>>> 71580760dc50a8a86b6079b05f3b7ddf31d047af
 		
 		<a href="RegisterPage.jsp" class="signout">Sign Up</a>
 		
@@ -173,6 +229,7 @@
 		
 	</div>
 	
+<<<<<<< HEAD
 	<div class="background">
 		<h1 class="background_text" style="font-size: 40px; padding-top: 180px;">Welcome Back!</h1>
 		<h2 class="background_text" style="font-size: 30px;">Sign in to find your perfect class</h2>
@@ -200,6 +257,25 @@
 		</form>
 	</div>
 	
+=======
+	<div class="login_div">
+		<img class="login_icon" src="login_image.png">
+		<form name="user_login" class="login_form" method="POST" action="login">
+		
+			<h1 class="signin_title">Sign In</h1>
+			
+			<input name="username" class="input_bar" type="text" placeholder="Username">
+			
+			<input name="password" class="input_bar" type="password" placeholder="Password">
+			
+			<br>${message}<br>
+						
+			<input class="sub_button" type="submit" value="Log In">
+			 
+			 
+		</form>
+	</div>
+>>>>>>> 71580760dc50a8a86b6079b05f3b7ddf31d047af
 </body>
 <script type="text/javascript">
 	function backToHome() {

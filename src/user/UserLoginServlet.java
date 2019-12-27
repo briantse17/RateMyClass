@@ -45,6 +45,10 @@ public class UserLoginServlet extends HttpServlet {
 		try {
 			User user = userDAO.checkLogin(username, password);
 			String destination = "LoginPage.jsp";
+<<<<<<< HEAD
+=======
+						
+>>>>>>> 71580760dc50a8a86b6079b05f3b7ddf31d047af
 			if(user == null){//no username
 				String m = "This user does not exist.";
 				request.setAttribute("message", m);
@@ -56,11 +60,19 @@ public class UserLoginServlet extends HttpServlet {
 			else {//authenticated
 				HttpSession session = request.getSession();
 				session.setAttribute("user", user);
+<<<<<<< HEAD
 				destination = request.getParameter("from");
 				if (destination.equals("null")) destination = "HomePage.jsp";
 			}
 			
 			response.sendRedirect(destination);
+=======
+				destination = "HomePage.jsp";
+			}
+			
+			RequestDispatcher dispatcher = request.getRequestDispatcher(destination);
+			dispatcher.forward(request, response);
+>>>>>>> 71580760dc50a8a86b6079b05f3b7ddf31d047af
 			
 		} catch (Exception e) {
 			throw new ServletException(e);
