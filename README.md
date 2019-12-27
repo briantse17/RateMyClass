@@ -5,12 +5,12 @@ Rate My Class was inspired by Rate my Professor, however with important distinct
 
 ### Installation
 * Ensure that Gson and MySQL jars are installed in the build path. They can be found at the links below:
-    * [MySQL Connector] (https://mvnrepository.com/artifact/mysql/mysql-connector-java/5.1.38)
-    * [MySQL Socket Factory for GCP] (https://mvnrepository.com/artifact/com.google.cloud.sql/mysql-socket-factory)
-    * [GSON] (https://search.maven.org/artifact/com.google.code.gson/gson/2.8.6/jar)
+    * [MySQL Connector](https://mvnrepository.com/artifact/mysql/mysql-connector-java/5.1.38)
+    * [MySQL Socket Factory for GCP](https://mvnrepository.com/artifact/com.google.cloud.sql/mysql-socket-factory)
+    * [GSON](https://search.maven.org/artifact/com.google.code.gson/gson/2.8.6/jar)
 * Run .sql script on database.
 * Run application on a server. We used Apache Tomcat for this project.
-    * [Tomcat] (http://tomcat.apache.org/)
+    * [Tomcat](http://tomcat.apache.org/)
     
 ### Technologies Used
 * Google Cloud Platform
