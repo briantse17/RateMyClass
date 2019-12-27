@@ -1,4 +1,4 @@
-# CSCI 201 Final Project - Rate My Classes
+# CSCI 201 Final Project - Rate My Class
 
 ### Concept
 Rate My Class was inspired by Rate my Professor, however with important distinctions. While there is a popular website to search for reviews of professors at schools, USC does not possess a central platform where students could share past experiences with specific classes with their peers. Our web application aims to help students to decide whether a class is a good fit for them by allowing previous students to leave comments on each class. With that being said, we intend to bring the focus on the class rather than the professor themselves, by focusing on metrics such as the level of difficulty and usefulness of these classes.
